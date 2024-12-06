@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 18:05:56 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 18:05:57 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
-void ft_pwd(void)
+void	ft_pwd(void)
 {
-	char *cwd;
+	char	*cwd;
 
-	cwd = getcwd(NULL, 0);//"get current working directory"(pathname),null->dynamically allocate memory,0->auto determine the buffer size
+	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 	{
-		perror("getcwd");//prints a descriptive error message to the standard error, This string is printed first,followed(: )and the error message corresponding to the value of errno.
+		perror("getcwd");
 		se.exit_status = 1;
 	}
-	printf("%s\n",cwd);
+	printf("%s\n", cwd);
 	free(cwd);
 	se.exit_status = 0;
 }

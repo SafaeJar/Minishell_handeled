@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cd_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 17:05:44 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 17:05:45 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../minishell.h"
 
 void	add_new_env_var(t_envi_node **env_list, char *name, char *content)
@@ -5,8 +17,10 @@ void	add_new_env_var(t_envi_node **env_list, char *name, char *content)
 	t_envi_node	*new_node;
 
 	new_node = (t_envi_node *)malloc(sizeof(t_envi_node));
-	if (!new_node || !(new_node->name = ft_strdup(name))
-		|| !(new_node->content = ft_strdup(content)))
+	new_node->name = ft_strdup(name);
+	new_node->content = ft_strdup(content);
+	if (!new_node || !(new_node->name)
+		|| !(new_node->content))
 	{
 		printf("minishell: memory allocation failed\n");
 		se.exit_status = 1;

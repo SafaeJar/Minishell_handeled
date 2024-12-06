@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 18:18:07 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_shell_vars	se;
@@ -44,6 +56,7 @@ int	main(int argc, char **argv, char **env)
 	char			*line;
 
 	tree = NULL;
+	line =NULL;
 	if (argc < 2 && !argv[1])
 	{
 		se.list = creer_envi(env);

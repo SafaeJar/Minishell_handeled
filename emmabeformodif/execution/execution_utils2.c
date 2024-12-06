@@ -1,35 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution_utils2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 18:13:19 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-int execute_file(char *path, char **argv, char **env, int v) {
-    pid_t pid;
+int	execute_file(char *path, char **argv, char **env, int v)
+{
+	pid_t	pid;
 
-    if (access(path, X_OK) == 0)
+	if (access(path, X_OK) == 0)
 	{
-        pid = fork();
-        if (pid == -1)
+		pid = fork();
+		if (pid == -1)
 		{
-            perror("minishell fork");
-            return 0;
-        }
-		else if (pid == 0) {
-            // printf("Executing: %s\n", path);
-            if(execve(path, argv, env))
+			perror("minishell fork");
+			return (0);
+		}
+		else if (pid == 0)
+		{
+			if (execve(path, argv, env))
 			{
-				 perror("minishell");
-            	exit(127);
+				perror("minishell");
+				exit(127);
 			}
-        }
-        waitpid(pid, &se.exit_status, 0);
-        if (v == 2)
-            free(path);
-        return 1;
-    }
+		}
+		waitpid(pid, &se.exit_status, 0);
+		if (v == 2)
+			free(path);
+		return (1);
+	}
 	else if (v == 1)
 	{
-        printf("minishell: %s: command not found\n", argv[0]);
-        se.exit_status = 127 * 256;
-    }
-    return 0;
+		printf("minishell: %s: command not found\n", argv[0]);
+		se.exit_status = 127 * 256;
+	}
+	return (0);
 }
 
 char	*search_(char **split_content, char **argv, char **args, int index)
@@ -50,35 +63,33 @@ char	*search_(char **split_content, char **argv, char **args, int index)
 	return (tmp2_path);
 }
 
-void *searsh_in_path(char *path, char **argv, char **env, char **args) {
-    char **split_content = ft_split(path, ':');
-    char *tmp_path;
-    int i;
+void	*searsh_in_path(char *path, char **argv, char **env, char **args)
+{
+	char	**split_content;
+	char	*tmp_path;
+	int		i;
 
-    if (!split_content)
-        return NULL;
-
-    i = 0;
-    while (split_content[i]) {
-        tmp_path = search_(split_content, argv, args, i);
-        if (!tmp_path)
-            return NULL;
-        if (execute_file(tmp_path, args, env, 2)) {
-            clear_path_content(split_content);
-            return (void *)1; // Command executed successfully
-        }
-        free(tmp_path);
-        i++;
-    }
-
-    
-   // printf("minishell: %s: command not found\n", argv[0]);
-    se.exit_status = 127 * 256;
-    clear_path_content(split_content);
-    return NULL;
+	split_content = ft_split(path, ':');
+	if (!split_content)
+		return (NULL);
+	i = 0;
+	while (split_content[i])
+	{
+		tmp_path = search_(split_content, argv, args, i);
+		if (!tmp_path)
+			return (NULL);
+		if (execute_file(tmp_path, args, env, 2))
+		{
+			clear_path_content(split_content);
+			return ((void *)1);
+		}
+		free(tmp_path);
+		i++;
+	}
+	se.exit_status = 127 * 256;
+	clear_path_content(split_content);
+	return (NULL);
 }
-
-
 
 void	*launch(t_parser_node *root, char **env)
 {
@@ -102,24 +113,24 @@ void	*launch(t_parser_node *root, char **env)
 	free(args);
 	return ((void *)1);
 }
-void *launch_executable(t_parser_node *root, int size) {
-    char **env = copy_env(size, 0);
-    if (!env)
-        return NULL;
 
-    if (check_path(root->av[0]))
+void	*launch_executable(t_parser_node *root, int size)
+{
+	char	**env;
+
+	env = copy_env(size, 0);
+	if (!env)
+		return (NULL);
+	if (check_path(root->av[0]))
 	{
-        if (!execute_file(root->av[0], root->av, env, 1))
-            printf("minishell: %s: command not found\n", root->av[0]);
-    }
+		if (!execute_file(root->av[0], root->av, env, 1))
+			printf("minishell: %s: command not found\n", root->av[0]);
+	}
 	else
 	{
-        // printf("Searching command: %s\n", root->av[0]);
-        if (!launch(root, env))
-            printf("minishell: %s: command not found\n", root->av[0]);
-    }
-
-    free_env(env, size);
-    return NULL;
+		if (!launch(root, env))
+			printf("minishell: %s: command not found\n", root->av[0]);
+	}
+	free_env(env, size);
+	return (NULL);
 }
-

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 18:03:54 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 18:03:55 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
-int ft_check_n(char *str)
+int	ft_check_n(char *str)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (str[0] != '-')
@@ -16,10 +28,10 @@ int ft_check_n(char *str)
 	return (0);
 }
 
-void ft_echo(t_parser_node *node,int argc)
+void	ft_echo(t_parser_node *node, int argc)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = 1;
 	a = 0;
@@ -30,7 +42,7 @@ void ft_echo(t_parser_node *node,int argc)
 	}
 	while (argc > i)
 	{
-		printf("%s",node->av[i]);
+		printf("%s", node->av[i]);
 		if (argc > i + 1)
 			printf(" ");
 		i++;

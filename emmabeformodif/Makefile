@@ -73,7 +73,6 @@ SRCS = 	envirenement/creation_envi.c \
 		execution/builtins/export/errors_parse_export.c\
 		execution/builtins/export/ft_export.c\
 		execution/builtins/ft_exit.c\
-		execution/free_env.c \
 		redirection/redirection.c\
 		redirection/heredoc.c\
 		redirection/rdr_input.c\

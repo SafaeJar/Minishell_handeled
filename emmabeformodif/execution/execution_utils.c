@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/06 18:11:47 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/06 18:11:48 by sjarfi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	clear_path_content(char **split_content)
@@ -9,28 +21,33 @@ void	clear_path_content(char **split_content)
 		free(split_content[i++]);
 	free(split_content);
 }
-int check_path(char *path) {
-    return (path[0] == '/' || (path[0] == '.' && path[1] == '/'));
+
+int	check_path(char *path)
+{
+	return (path[0] == '/' || (path[0] == '.' && path[1] == '/'));
 }
 
+char	**copy_env(int size, int index)
+{
+	char		**env;
+	t_envi_node	*head;
+	char		*name_eq;
 
-char **copy_env(int size, int index) {
-    char **env = malloc((size + 1) * sizeof(char *));
-    if (!env)
-        return perror("minishell malloc"), NULL;
-
-    t_envi_node *head = se.list;
-    while (head && index < size) {
-        char *name_eq = ft_strjoin(head->name, "="); // Join name and "="
-        env[index] = ft_strjoin(name_eq, head->content); // Join result with content
-        free(name_eq); // Free intermediate allocation
-        head = head->next;
-        index++;
-    }
-    env[index] = NULL;
-    return env;
+	env = malloc((size + 1) * sizeof(char *));
+	if (!env)
+		return (perror("minishell malloc"), NULL);
+	head = se.list;
+	while (head && index < size)
+	{
+		name_eq = ft_strjoin(head->name, "=");
+		env[index] = ft_strjoin(name_eq, head->content);
+		free(name_eq);
+		head = head->next;
+		index++;
+	}
+	env[index] = NULL;
+	return (env);
 }
-
 
 void	free_env(char **env, int index)
 {
