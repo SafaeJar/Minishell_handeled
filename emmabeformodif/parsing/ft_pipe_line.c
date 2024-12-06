@@ -30,6 +30,7 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 
 	ptr = (void *)-1;
 	cmd = collect_cmd(lexer);
+	
 	if (cmd && cmd != ptr)
 	{
 		pipe = check_pipe(lexer);
@@ -37,6 +38,7 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 			return (cmd);
 		if (pipe)
 			pipe->left = cmd;
+
 		else
 			node_del(&cmd);
 		return (pipe);

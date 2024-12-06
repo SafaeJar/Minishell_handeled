@@ -84,8 +84,8 @@ t_envi_node	*create_new_node(char *variable_content)
 		content = ft_strdup("");
 	else if (variable_content[index + 1] == '\0')
 	{
-		content = ft_strdup("\"\"");
-		name_len = len - 1;
+		content = ft_strdup("\'\'");
+		//name_len = len - 1;
 	}
 	else
 	{

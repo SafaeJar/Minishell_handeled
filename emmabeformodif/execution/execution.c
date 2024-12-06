@@ -9,7 +9,7 @@ void	run_command(t_parser_node *node)
 	if(!ft_strcmp(cmd,"cd"))
 		ft_cd(node->av[1],node->ac);
 	else if(!ft_strcmp(cmd,"export"))
-		ft_export(node->av,node->ac);
+		ft_export(node);
 	else if(!ft_strcmp(cmd,"echo"))
 		ft_echo(node,node->ac);
 	else if(!ft_strcmp(cmd,"env"))

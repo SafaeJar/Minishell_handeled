@@ -30,16 +30,25 @@ int	check_plus(char *name, char *content)
 		j++;
 	}
 	if ((name[j - 1] == '+' && count > 1) ||
-			(name[j - 1] == '+' && content[0] == '\0'))//this part check if export var+=hello (export var+= or export v+a++r)
-		return(1);
+		(name[j - 1] == '+' && content[0] == '\0'))//this part check if export var+=hello (export var+= or export v+a++r)
+			return(1);
 	return(0);
 }
+
+
+
 int	validate_identifier(char *name, char *content, int len, int err_opt)
 {
 	int j;
 
 	j = 0;
-	if(ft_isdigit(name[j]))
+	if(ft_isdigit(name[j]) && !*content)
+	{
+		return(printf("minishell: export: `%s': not a valid identifier\n",
+			name));
+	}
+	else if(ft_isdigit(name[j]))
+	//return(printf("export:: command not found\n"));
 		return(printf("minishell: export: `%s=%s': not a valid identifier\n",
 			name, content));
 	if(name[j] == '-' && err_opt == 1)//argv 1
@@ -56,8 +65,9 @@ int	validate_identifier(char *name, char *content, int len, int err_opt)
 		if (((name[j] <= 64 && !ft_isdigit(name[j])) || (name[j] >= 91
 					&& name[j] <= 96 && name[j] != '_') || name[j] >= 123)
 			&& name[len - 1] != '+')
-			return (printf("minishell: export: `%s=%s': ", name, content),
-				printf("not a valid identifier\n"));
+			return(printf("export:: command not found\n"));
+			// return (printf("minishell: export: `%s=%s': ", name, content),
+			// 	printf("not a valid identifier\n"));
 		j++;
 	}
 	return (0);

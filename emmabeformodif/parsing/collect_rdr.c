@@ -98,7 +98,7 @@ t_rdr_node	*collect_rdr(t_lexer *lexer, t_rdr_node *rdr, t_token token)
 	token = get_next_token(lexer);
 if (token.type != WORD && token.type != VAR)
 {
-    ft_putstr_fd("minishell: syntax error near unexpected token ", 2);
+    ft_putstr_fd("minishell: syntax error near unexpected token", 2);
 
     if (token.pos && token.len > 0) // Check if the token is non-empty
     {

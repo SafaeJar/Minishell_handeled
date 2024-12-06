@@ -34,7 +34,7 @@ void	ft_unset(t_parser_node *node)
 	int	check;
 	int a;
 
-	a = 1;
+	a = 0;
 	check = 0;
 	if(node->ac > 1)
 	{
@@ -43,8 +43,10 @@ void	ft_unset(t_parser_node *node)
 			se.exit_status = 512; // Set exit status for invalid option
 			printf("unset: %s: invalid option\n", node->av[1]);
             printf("unset: usage: unset [name ...]\n");
-			return;
+			//return;
 		}
+		else if(node->ac>=2)
+		{
 		while(node->av[a])
 		{
 			unset_variable(node->av[a],&check);
@@ -52,8 +54,9 @@ void	ft_unset(t_parser_node *node)
 				ft_list_remove_if(&se.list,node->av[a]);
 			a++;
 		}
+		}
 		se.exit_status = 0;
 	}
 	se.exit_status = 1;
-	printf("unset: not enough arguments\n");
+	//printf("unset: not enough arguments\n");
 }

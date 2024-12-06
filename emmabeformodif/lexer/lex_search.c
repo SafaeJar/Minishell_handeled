@@ -18,7 +18,6 @@ t_token	expand_all(t_lexer *lexer, int var, int len)
 t_token word_collect(t_lexer *lexer, int var, int len) {
     int mode = 0;
     char *s = lexer->str;
-
     while (s[len] != '\0' && (mode != 0 || !ft_strchr(" \t\n|&()<>", s[len]))) {
         mode = change_mode2(mode, s[len]);
 

@@ -212,7 +212,7 @@ void	*concatenate_variable(t_envi_node *node);
 int	validate_identifier(char *name, char *content, int len, int err_opt);
 int	check_plus(char *name, char *content);
 int	handle_parse_errors(t_envi_node *new, int parse_result, int *i);
-void	ft_export(char **argv,int argc);
+void	ft_export(t_parser_node *node);
 void	print_sorted_env(void);
 void	intialise_len(void);
 void	add_variables_to_env(char **argv, int index);
@@ -255,6 +255,7 @@ void			node_ptr(t_parser_node **node, t_parser_node *left,
 					t_parser_node *right);
 void			rdr_clear(t_rdr_node **lst);
 void			print_error(t_token token);
+void print_error2(int x);
 void			handle_signal(int state);
 int					change_mode(int i, char c);
 char				*quote_def(char *str);

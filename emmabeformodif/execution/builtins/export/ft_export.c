@@ -7,7 +7,7 @@ void	add_variables_to_env(char **argv, int index)
 	int		check;
 
 	se.exit_status = 0;
-	while (argv[index++])
+	while (argv[index])
 	{
 		if (argv[index][0] == ';' || argv[index][0] == '#')
 			break ;
@@ -26,6 +26,7 @@ void	add_variables_to_env(char **argv, int index)
 				continue ;
 		}
 		add_dernier(&se.list, new);
+		index++;
 	}
 }
 void	intialise_len(void)
@@ -62,14 +63,13 @@ void	print_sorted_env(void)
 	intialise_len();
 }
 
-void	ft_export(char **argv,int argc)
+void	ft_export(t_parser_node *node)
 {
-	if (argc == 1 || (argc == 2 && (argv[1][0] == '#'
-			|| argv[1][0] == ';')))
+	if (node->ac == 1 || (node->ac == 2 && (node->av[1][0] == '#'
+			|| node->av[1][0] == ';')))
 	{
 		print_sorted_env();
 		se.exit_status = 0;
 	}
-	else
-		add_variables_to_env(argv, 1);
+		add_variables_to_env(node->av, 1);
 }
