@@ -2,7 +2,7 @@
 
 void	print_error(t_token token)
 {
-	if (token.type == TOK)
+	if (token.type == TOKEN)
 	{
 		ft_putstr_fd("minishell: syntax error: unrecognized token ", 2);
 		write(2, "'", 1);
@@ -16,7 +16,7 @@ void	print_error(t_token token)
 		write(2, "|", 1);
 		write(2, "'\n", 2);
 	}
-	if (token.type == ENDF)
+	if (token.type == END_OF_FILE)
 		ft_putstr_fd("minishel: syntax error: unexpected end of file\n", 2);
 }
 void print_error2(int x)

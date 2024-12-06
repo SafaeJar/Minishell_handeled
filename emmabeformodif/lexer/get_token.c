@@ -17,7 +17,7 @@ t_token get_token(t_lexer *lexer) {
 			        print_error2(2);
 			        return (t_init(ERROR, 0, NULL));
 		        }
-		    if (lexer->prev_type.type == PIPE || lexer->prev_type.type == CHAR_NULL)
+		    if (lexer->prev_type.type == PIPE || lexer->prev_type.type == TOKEN_NULL)
 		        {
 			        print_error(t_init(ERROR, 0, NULL));
 			        return (t_init(ERROR, 0, NULL));
@@ -27,16 +27,16 @@ t_token get_token(t_lexer *lexer) {
 	    }
 
     if (!ft_strncmp(lexer->str, "<<", 2))
-        return t_init(HERDOC, 2, lexer->str);
+        return t_init(HEREDOC, 2, lexer->str);
 
     if (!ft_strncmp(lexer->str, ">>", 2))
-        return t_init(RD_APP, 2, lexer->str);
+        return t_init(REDIRECT_APPEND, 2, lexer->str);
 
     if (!ft_strncmp(lexer->str, "<", 1))
-        return t_init(RD_IN, 1, lexer->str);
+        return t_init(REDIRECT_INPUT, 1, lexer->str);
 
     if (!ft_strncmp(lexer->str, ">", 1))
-        return t_init(RD_OUT, 1, lexer->str);
+        return t_init(REDIRECT_OUTPUT, 1, lexer->str);
     // Default case: Collect words or variables
     return word_collect(lexer, 0, 0);
 }

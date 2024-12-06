@@ -70,6 +70,7 @@ SRCS = 	envirenement/creation_envi.c \
 		execution/builtins/ft_unset.c\
 		execution/builtins/export/ft_export_utils.c\
 		execution/builtins/export/ft_parse_export.c\
+		execution/builtins/export/errors_parse_export.c\
 		execution/builtins/export/ft_export.c\
 		execution/builtins/ft_exit.c\
 		execution/free_env.c \
@@ -77,6 +78,7 @@ SRCS = 	envirenement/creation_envi.c \
 		redirection/heredoc.c\
 		redirection/rdr_input.c\
 		redirection/rdr_output.c\
+		envirenement/creation_env_erors.c\
 		signals.c main.c # Ajoute ici les autres fichiers source .c nécessaires
 
 # Fichiers objets générés à partir des sources

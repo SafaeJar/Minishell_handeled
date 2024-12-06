@@ -17,23 +17,23 @@ void	execute_rdr_output_cmd(t_parser_node *node, t_out_in_file *file)
 	waitpid(pid, NULL, 0);
 }
 
-int	get_output_file(t_parser_node *node, t_rdr_node *head, t_out_in_file *file)
+int	get_output_file(t_parser_node *node, t_redirect_node *head, t_out_in_file *file)
 {
-	if (head->type == RD_OUT && file->input_file != -1
+	if (head->type == REDIRECT_OUTPUT && file->input_file != -1
 		&& file->output_file != -1)
 	{
 		if (file->output_file != 1)
 			close(file->output_file);
 		file->output_file = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	}
-	else if (head->type == RD_APP && file->input_file != -1
+	else if (head->type == REDIRECT_APPEND && file->input_file != -1
 		&& file->output_file != -1)
 	{
 		if (file->output_file != 1)
 			close(file->output_file);
 		file->output_file = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0777);
 	}
-	else if (head->type == RD_IN && file->output_file != -1
+	else if (head->type == REDIRECT_INPUT && file->output_file != -1
 		&& file->input_file != -1)
 		rdr_input(node, head, file, 0);
 	if (file->output_file == -1 || file->input_file == -1)
@@ -44,8 +44,8 @@ int	get_output_file(t_parser_node *node, t_rdr_node *head, t_out_in_file *file)
 	}
 	return (0);
 }
-void *rdr_output(t_parser_node *n, t_rdr_node *l, t_out_in_file *file, int v) {
-    t_rdr_node *head = l;
+void *rdr_output(t_parser_node *n, t_redirect_node *l, t_out_in_file *file, int v) {
+    t_redirect_node *head = l;
 
     while (head) {
 		get_output_file(n, head, file);
@@ -61,19 +61,4 @@ void *rdr_output(t_parser_node *n, t_rdr_node *l, t_out_in_file *file, int v) {
     return NULL;
 }
 
-// void	*rdr_output(t_parser_node *n, t_rdr_node *l, t_out_in_file *file, int v)
-// {
-// 	t_rdr_node	*head;
 
-// 	head = l;
-// 	while (head)
-// 	{
-// 		get_output_file(n, head, file);
-// 		if (file->output_file == -1 || file->input_file == -1)
-// 			return (NULL);
-// 		head = head->next;
-// 	}
-// 	if (v == 1 && file->input_file != -1 && file->output_file != -1)
-// 		execute_rdr_output_cmd(n, file);
-// 	return (NULL);
-//}

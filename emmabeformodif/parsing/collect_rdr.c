@@ -8,7 +8,7 @@ static int	get_heredoc_l(char *f, int fd, char *line, bool expand)
 	if (expand)
 	{
 		lexer = lex_init(line);
-		expanded = lex_var(*lexer, ft_strlen(lexer->full_str));
+		expanded = lex_var(*lexer, ft_strlen(lexer->input_string));
 		if (!expanded.pos)
 		{
 			close(fd);
@@ -86,17 +86,17 @@ static char	*rdr_filename(t_token file)
 {
 	char	*s;
 
-	if (file.type == VAR)
+	if (file.type == VARIABLE)
 		s = ft_substr(file.pos, 0, ft_strlen(file.pos));
 	else
 		s = ft_substr(file.pos, 0, file.len);
 	return (s);
 }
 
-t_rdr_node	*collect_rdr(t_lexer *lexer, t_rdr_node *rdr, t_token token)
+t_redirect_node	*collect_rdr(t_lexer *lexer, t_redirect_node *rdr, t_token token)
 {
 	token = get_next_token(lexer);
-if (token.type != WORD && token.type != VAR)
+if (token.type != WORD && token.type != VARIABLE)
 {
     ft_putstr_fd("minishell: syntax error near unexpected token", 2);
 
@@ -114,7 +114,7 @@ if (token.type != WORD && token.type != VAR)
     return ((void *)-1);
 }
 
-	rdr = malloc(sizeof(t_rdr_node));
+	rdr = malloc(sizeof(t_redirect_node));
 	if (!rdr)
 	{
 		perror("minishell");
@@ -122,7 +122,7 @@ if (token.type != WORD && token.type != VAR)
 	}
 	rdr->next = NULL;
 	rdr->type = lexer->prev_type.type;
-	if (rdr->type == HERDOC)
+	if (rdr->type == HEREDOC)
 		rdr->file = heredoc_filename(token, ft_substr(token.pos, 0, token.len));
 	else
 		rdr->file = rdr_filename(token);

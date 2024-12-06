@@ -1,73 +1,40 @@
 #include "../../../minishell.h"
 
-// t_envi_node	*find_max_variable(void)
-// {
-// 	t_envi_node	*head;
-// 	t_envi_node	max_var;
-
-// 	max_var.name = "";
-// 	max_var.content = "";
-// 	max_var.len = 0;
-// 	head = se.list;
-// 	while (head)
-// 	{
-// 		if (ft_strcmp(head->name, max_var.name) >= 0)
-// 		{
-// 			max_var.name = head->name;
-// 			max_var.content = head->content;
-// 		}
-// 		head = head->next;
-// 	}
-// 	return (max_var);
-// }
-
-t_envi_node *find_max_variable(void)
+t_envi_node	*find_max_variable(void)
 {
-    t_envi_node *head = se.list;
-    t_envi_node *max_var = NULL;
+	t_envi_node	*head;
+	t_envi_node	*max_var;
 
-    while (head)
-    {
-        if (!max_var || ft_strcmp(head->name, max_var->name) > 0)
-            max_var = head;
-        head = head->next;
-    }
-    return max_var;
+	head = se.list;
+	max_var = NULL;
+	while (head)
+	{
+		if (!max_var || ft_strcmp(head->name, max_var->name) > 0)
+			max_var = head;
+		head = head->next;
+	}
+	return (max_var);
 }
-t_envi_node *find_min_variable()
+
+t_envi_node	*find_min_variable(void)
 {
-    t_envi_node *tmp = se.list;
-    t_envi_node *min_var = NULL;
+	t_envi_node	*tmp;
+	t_envi_node	*min_var;
 
-    while (tmp)
-    {
-        if ((!min_var || ft_strcmp(tmp->name, min_var->name) < 0) && tmp->len != -1)
-            min_var = tmp;
-        tmp = tmp->next;
-    }
-    if (min_var)
-        min_var->len = -1;
-    return min_var;
+	tmp = se.list;
+	min_var = NULL;
+	while (tmp)
+	{
+		if ((!min_var || ft_strcmp(tmp->name, min_var->name) < 0) && tmp->len
+			!= -1)
+			min_var = tmp;
+		tmp = tmp->next;
+	}
+	if (min_var)
+		min_var->len = -1;
+	return (min_var);
 }
-// t_envi_node	*find_min_variable(t_envi_node min_var)
-// {
-// 	t_envi_node		*tmp;
-// 	int			*tmp_len;
 
-// 	tmp_len = NULL;
-// 	tmp = se.list;
-// 	while (tmp)
-// 	{
-// 		if (ft_strcmp(tmp->name, min_var.name) <= 0 && tmp->len != -1)
-// 		{
-// 			min_var = *tmp;
-// 			tmp_len = &tmp->len;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// 	*tmp_len = -1;
-// 	return (min_var);
-// }
 t_envi_node	*create_new_node(char *variable_content)
 {
 	int		index;
@@ -85,7 +52,6 @@ t_envi_node	*create_new_node(char *variable_content)
 	else if (variable_content[index + 1] == '\0')
 	{
 		content = ft_strdup("\'\'");
-		//name_len = len - 1;
 	}
 	else
 	{
@@ -94,8 +60,10 @@ t_envi_node	*create_new_node(char *variable_content)
 	}
 	if (!content)
 		return (NULL);
-	return (nv_node(content, ft_substr(variable_content, 0, name_len), name_len));
+	return (nv_node(content, ft_substr(variable_content, 0, name_len),
+			name_len));
 }
+
 int	remove_variable_if_path_empty(t_envi_node *var_node, int *index)
 {
 	if (!ft_strcmp(var_node->name, "PATH") && var_node->content[0] == '\0')

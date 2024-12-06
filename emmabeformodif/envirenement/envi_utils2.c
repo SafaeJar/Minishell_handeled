@@ -1,39 +1,42 @@
 #include "../minishell.h"
 
-int         env_listsize(t_envi_node *env)
+int	env_listsize(t_envi_node *env)
 {
-    int a;
+	int	a;
 
-    a = 0;
-    while(env)
-    {
-        a++;
-        env = env->next;
-    }
-    return(a);
+	a = 0;
+	while (env)
+	{
+		a++;
+		env = env->next;
+	}
+	return (a);
 }
+
 void	delete_env(t_envi_node *node)
 {
 	free(node->name);
 	free(node->content);
 	free(node);
 }
-t_envi_node *var_find(t_envi_node *env, char *s)
-{
-    int         len;
 
-    len = ft_strlen(s);
-    while(env)
-    {
-        if(len == env->len && ft_strcmp(env->name, s) == 0)
-        return(env);
-        env = env->next;
-    }
-    return(NULL);
-}
-void        ft_list_remove_if(t_envi_node   **begin_list,void *data_ref)
+t_envi_node	*var_find(t_envi_node *env, char *s)
 {
-    t_envi_node	*cur;
+	int	len;
+
+	len = ft_strlen(s);
+	while (env)
+	{
+		if (len == env->len && ft_strcmp(env->name, s) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+void	ft_list_remove_if(t_envi_node **begin_list, void *data_ref)
+{
+	t_envi_node	*cur;
 
 	if (*begin_list == NULL || begin_list == NULL)
 		return ;

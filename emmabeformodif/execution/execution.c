@@ -21,7 +21,7 @@ void	run_command(t_parser_node *node)
 	else if(!ft_strcmp(cmd,"unset"))
 		ft_unset(node);
 	else
-		launch_executabl(node, env_listsize(se.list));
+		launch_executable(node, env_listsize(se.list));
 	free(cmd);
 }
 
@@ -68,7 +68,7 @@ void	execution(t_parser_node *node)
 		return;
 	if(node->type == PIPE)
 		ft_pipe(node);
-	else if(node->type == CMD)
+	else if(node->type == COMMAND)
 	{
 		if(node->rdrlst)
 			redirection(node);

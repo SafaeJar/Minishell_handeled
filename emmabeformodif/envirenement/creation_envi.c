@@ -1,32 +1,30 @@
-#include"../minishell.h"
+#include "../minishell.h"
 
-t_envi_node *add_env_node(t_envi_node *var, char *s)
+t_envi_node	*add_env_node(t_envi_node *var, char *s, int j)
 {
-    t_envi_node *new;
-    char *name;
-    char *content;
-    int j = 0;
+	t_envi_node	*new;
+	char		*name;
+	char		*content;
 
-    while (s[j])
-    {
-        if (s[j] == '=')
-        {
-            content = ft_substr(s, j + 1, -1);
-            if (!content)
-                return (printf("minishell: memory allocation failed for content!\n"), NULL);
-            name = ft_substr(s, 0, j);
-            if (!name)
-                return (printf("minishell: memory allocation failed for name!\n"),
-                        free(content), NULL);
-            new = nv_node(content, name, j);
-            if (!new)
-                return (free(name), free(content), NULL);
-            add_dernier(&var, new);
-            break;
-        }
-        j++;
-    }
-    return (var);
+	while (s[j])
+	{
+		if (s[j] == '=')
+		{
+			content = ft_substr(s, j + 1, -1);
+			if (!content)
+				handle_content_allocation_error();
+			name = ft_substr(s, 0, j);
+			if (!name)
+				handle_name_allocation_error(content);
+			new = nv_node(content, name, j);
+			if (!new)
+				return (free(name), free(content), NULL);
+			add_dernier(&var, new);
+			break ;
+		}
+		j++;
+	}
+	return (var);
 }
 
 void	_shell_level(t_envi_node **lst)
@@ -53,6 +51,7 @@ void	_shell_level(t_envi_node **lst)
 	}
 	add_dernier(lst, nv_node(ft_strdup("1"), ft_strdup("SHLVL"), 5));
 }
+
 void	_set_pwd(t_envi_node **lst)
 {
 	t_envi_node	*head;
@@ -74,21 +73,21 @@ void	_set_pwd(t_envi_node **lst)
 	add_dernier(lst, nv_node(cwd, ft_strdup("PWD"), 3));
 }
 
-t_envi_node *creer_envi(char **env)
+t_envi_node	*creer_envi(char **env)
 {
-    t_envi_node *var;
-    int i;
+	t_envi_node	*var;
+	int			i;
 
-    i=0;
-    var=NULL;
-    while(env[i])
-    {
-        var = add_env_node(var,env[i]);
-        if(!var)
-            return(NULL);
-        i++;
-    }
-    _set_pwd(&var);
-    _shell_level(&var);
-    return(var);
+	i = 0;
+	var = NULL;
+	while (env[i])
+	{
+		var = add_env_node(var, env[i], 0);
+		if (!var)
+			return (NULL);
+		i++;
+	}
+	_set_pwd(&var);
+	_shell_level(&var);
+	return (var);
 }

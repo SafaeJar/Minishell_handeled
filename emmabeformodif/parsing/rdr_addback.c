@@ -1,8 +1,8 @@
 #include "../minishell.h"
 
-void	rdr_clear(t_rdr_node **lst)
+void	rdr_clear(t_redirect_node **lst)
 {
-	t_rdr_node	*tmp;
+	t_redirect_node	*tmp;
 
 	tmp = NULL;
 	if (!lst)
@@ -11,16 +11,16 @@ void	rdr_clear(t_rdr_node **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		if (tmp->type == HERDOC)
+		if (tmp->type == HEREDOC)
 			unlink(tmp->file);
 		free((tmp->file));
 		free(tmp);
 	}
 }
 
-void	rdr_addback(t_rdr_node **lst, t_rdr_node *_new)
+void	rdr_addback(t_redirect_node **lst, t_redirect_node *_new)
 {
-	t_rdr_node	*p;
+	t_redirect_node	*p;
 
 	p = *lst;
 	if (!(*lst))

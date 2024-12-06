@@ -1,15 +1,15 @@
 #include "../minishell.h"
 
-char	*get_herdoc_file(t_rdr_node *rdrlst)
+char	*get_herdoc_file(t_redirect_node *rdrlst)
 {
-	t_rdr_node	*head;
-	t_rdr_node	*herdoc_file;
+	t_redirect_node	*head;
+	t_redirect_node	*herdoc_file;
 
 	head = rdrlst;
 	herdoc_file = NULL;
 	while (head)
 	{
-		if (head->type == HERDOC)
+		if (head->type == HEREDOC)
 			herdoc_file = head;
 		head = head->next;
 	}
@@ -33,9 +33,9 @@ void	execute_heredoc_cmd(t_parser_node *node, t_out_in_file *file)
 	waitpid(pid, NULL, 0);
 }
 
-void	*herdoc_(t_parser_node *n, t_rdr_node *lst, t_out_in_file *file, int v)
+void	*herdoc_(t_parser_node *n, t_redirect_node *lst, t_out_in_file *file, int v)
 {
-	t_rdr_node	*head;
+	t_redirect_node	*head;
 	char		*tmp;
 
 	tmp = get_herdoc_file(lst);
@@ -45,10 +45,10 @@ void	*herdoc_(t_parser_node *n, t_rdr_node *lst, t_out_in_file *file, int v)
 	head = lst;
 	while (head)
 	{
-		if ((head->type == RD_OUT || head->type == RD_APP)
+		if ((head->type == REDIRECT_OUTPUT || head->type == REDIRECT_APPEND)
 			&& (file->input_file != -1 && file->output_file != -1))
 			rdr_output(n, head, file, 0);
-		if (head->type == RD_IN && file->input_file != -1
+		if (head->type == REDIRECT_INPUT && file->input_file != -1
 			&& file->output_file != -1)
 			rdr_input(n, head, file, 0);
 		head = head->next;

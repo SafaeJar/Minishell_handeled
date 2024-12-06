@@ -35,6 +35,24 @@ int	check_plus(char *name, char *content)
 	return(0);
 }
 
+// int validate_identifier(char *name, char *content, int len, int err_opt) {
+//     int j = 0;
+
+//     // Vérifie si le premier caractère est un chiffre
+//     if (ft_isdigit(name[j]))
+//         return handle_digit_start(name, content);
+
+//     // Vérifie si une option invalide est détectée
+//     if (name[j] == '-' && err_opt == 1)
+//         return handle_invalid_option(name);
+
+//     // Vérifie une condition externe (par exemple, le "+" dans le nom)
+//     if (check_plus(name, content))
+//         return printf("minishell: export: `%s': not a valid identifier\n", name);
+
+//     // Vérifie les caractères invalides dans le nom
+//     return check_invalid_characters(name, len);
+// }
 
 
 int	validate_identifier(char *name, char *content, int len, int err_opt)

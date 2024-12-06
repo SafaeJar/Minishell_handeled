@@ -3,8 +3,8 @@
 void	add_variables_to_env(char **argv, int index)
 {
 	t_envi_node	*new;
-	int		check_parse;
-	int		check;
+	int			check_parse;
+	int			check;
 
 	se.exit_status = 0;
 	while (argv[index])
@@ -29,6 +29,7 @@ void	add_variables_to_env(char **argv, int index)
 		index++;
 	}
 }
+
 void	intialise_len(void)
 {
 	t_envi_node	*head;
@@ -71,5 +72,5 @@ void	ft_export(t_parser_node *node)
 		print_sorted_env();
 		se.exit_status = 0;
 	}
-		add_variables_to_env(node->av, 1);
+	add_variables_to_env(node->av, 1);
 }

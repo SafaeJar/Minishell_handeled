@@ -12,7 +12,7 @@ static int	av_size(char **av)
 	return (i);
 }
 
-t_parser_node	*node_create(t_cmd **av, t_rdr_node *rdrlist, t_token_type tp)
+t_parser_node	*node_create(t_cmd **av, t_redirect_node *rdrlist, t_token_type tp)
 {
 	t_parser_node	*node;
 

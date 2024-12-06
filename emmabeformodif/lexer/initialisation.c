@@ -5,10 +5,10 @@ t_lexer	*lex_init(char *s)
 	t_lexer	*lexer;
 
 	lexer = malloc(sizeof(t_lexer));
-	lexer->full_str = s;
+	lexer->input_string = s;
 	lexer->str = s;
-	lexer->prev_type = t_init(CHAR_NULL, 0, NULL);
-	lexer->curent_type = t_init(CHAR_NULL, 0, NULL);
+	lexer->prev_type = t_init(TOKEN_NULL, 0, NULL);
+	lexer->curent_type = t_init(TOKEN_NULL, 0, NULL);
 	return (lexer);
 }
 

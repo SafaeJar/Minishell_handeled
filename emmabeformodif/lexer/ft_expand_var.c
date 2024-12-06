@@ -95,7 +95,7 @@ t_token	lex_var(t_lexer lexer, int len)
 	char	*full;
 
 	expnd = NULL;
-	if (lexer.prev_type.type == HERDOC)
+	if (lexer.prev_type.type == HEREDOC)
 		return (t_init(WORD, len, lexer.str));
 	full = ft_strdup("");
 	s = ft_substr(lexer.str, 0, len);
@@ -104,6 +104,6 @@ t_token	lex_var(t_lexer lexer, int len)
 	full = lex_var2(str, full, s, expnd);
 	ft_clear_av(str);
 	if (full)
-		return (t_init(VAR, len, full));
+		return (t_init(VARIABLE, len, full));
 	return (t_init(WORD, len, lexer.str));
 }

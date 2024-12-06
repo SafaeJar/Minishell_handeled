@@ -7,7 +7,7 @@ t_token	expand_all(t_lexer *lexer, int var, int len)
 	if (var == 1)
 	{
 		token = lex_var(*lexer, len);
-		if (token.type == VAR)
+		if (token.type == VARIABLE)
 		{
 			token.len = len;
 			return (token);
