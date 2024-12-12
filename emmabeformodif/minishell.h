@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:18:09 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/12 13:02:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define DEF_SINGEL_Q -1
-# define DEF_DOUBEL_Q -2
+# define DEF_SINGEL_Q -1// Represents a single quote (')
+# define DEF_DOUBEL_Q -2//Represents a double quote (")
 ///////////////////////////////////////////
 typedef enum e_sig_state
 {
@@ -69,44 +69,44 @@ typedef enum e_token_type
 typedef struct token
 {
 	int						len;
-	char					*pos;
+	char					*position;//Pointer to the position of the token in the input string
 	t_token_type			type;
 }							t_token;
 typedef struct s_lexer
 {
-	char					*input_string;
-	char					*str;
-	t_token					prev_type;
-	t_token					curent_type;
+	char					*input_string;//The full input string being tokenized
+	char					*current_position;//Pointer to the current position in the string
+	t_token					prev_token;//The previous token identified
+	t_token					current_token;// The current token being analyzed.
 }							t_lexer;
 typedef struct s_redirect_node
 {
 	t_token_type			type;
-	char					*file;
+	char					*file;//File associated with the redirection
 	struct s_redirect_node	*next;
 }							t_redirect_node;
 typedef struct s_parser_node
 {
-	t_token_type			type;
+	t_token_type			type;//Type of the node
 	char					**av;
 	int						ac;
-	t_redirect_node			*rdrlst;
-	struct s_parser_node	*left;
-	struct s_parser_node	*right;
+	t_redirect_node			*redirect_list;//List of redirections for this node.
+	struct s_parser_node	*left_child;
+	struct s_parser_node	*right_child;
 }							t_parser_node;
-typedef struct s_wc_node
+typedef struct s_file_node
 {
-	char					*d_name;
+	char					*file_name;// The name of the file
 	int						len;
-	struct s_wc_node		*next;
-}							t_wc_node;
+	struct s_file_node		*next;
+}							t_file_node;
 
-typedef struct s_cmd
+typedef struct s_command
 {
-	t_wc_node				*wc;
-	char					*word;
-	struct s_cmd			*next;
-}							t_cmd;
+	t_file_node				*files;//Associated file nodes
+	char					*word;//The command or argument word
+	struct s_command			*next;
+}							t_command;
 typedef struct s_out_in_file
 {
 	int						input_file;
@@ -143,8 +143,8 @@ void						df_sigint(int sig);
 // void	free_env(void);
 void						execution(t_parser_node *node);
 void						ft_pipe(t_parser_node *node);
-void						execute_right_cmd(int *fd, t_parser_node *right);
-void						execute_left_cmd(int *fd, t_parser_node *left);
+void						execute_right_command(int *fd, t_parser_node *right);
+void						execute_left_command(int *fd, t_parser_node *left);
 void						run_command(t_parser_node *node);
 void						ft_unset(t_parser_node *node);
 void						unset_variable(char *argv, int *check);
@@ -203,14 +203,14 @@ void						*searsh_in_path(char *path, char **argv, char **env,
 void						clear_path_content(char **split_content);
 t_parser_node				*check_pipe(t_lexer *lexer);
 t_parser_node				*ft_pipe_line(t_lexer *lexer);
-t_parser_node				*collect_cmd(t_lexer *lexer);
+t_parser_node				*collect_command(t_lexer *lexer);
 t_parser_node				*parse(char *input);
 t_parser_node				*parse_input(t_lexer *lexer);
-t_cmd						*cmd_ccomponents(t_lexer *lexer,
+t_command						*cmd_ccomponents(t_lexer *lexer,
 								t_redirect_node **rdr);
-t_parser_node				*node_create(t_cmd **av, t_redirect_node *rdrlist,
+t_parser_node				*node_create(t_command **av, t_redirect_node *rdrlist,
 								t_token_type tp);
-char						**av_creat(t_cmd **list);
+char						**av_creat(t_command **list);
 t_redirect_node				*collect_rdr(t_lexer *lexer, t_redirect_node *rdr,
 								t_token token);
 void						rdr_addback(t_redirect_node **lst,
@@ -229,23 +229,23 @@ t_lexer						*lex_init(char *s);
 t_token						word_collect(t_lexer *lexer, int var, int len);
 t_token						get_token(t_lexer *lexer);
 t_token						get_next_token(t_lexer *lexer);
-t_token						t_wc_init(t_token_type type, int len, t_wc_node *p,
+t_token						t_wc_init(t_token_type type, int len, t_file_node *p,
 								char *pos);
 t_token						lex_var(t_lexer lexer, int len);
 int							change_mode2(int i, char c);
 char						*exp_var(char **sp);
 char						*exit_status(char **s);
 char						*ft_exp(char *expnd, char **s);
-t_cmd						*ft_new_cmd(char *content, t_wc_node **list);
-void						cmd_addback(t_cmd **lst, t_cmd *new);
-t_cmd						*cmd_lstlast(t_cmd *lst);
-t_wc_node					*lstlast_dir(t_wc_node *lst);
-void						lstadd_back_dir(t_wc_node **lst, t_wc_node *new_ld);
-t_wc_node					*lstnew_dir(char *content, int len);
-int							wc_size(t_wc_node *lst);
-int							cmd_size(t_cmd *lst);
-void						wc_clear(t_wc_node **lst);
-void						cmd_clear(t_cmd **lst);
+t_command						*ft_new_cmd(char *content, t_file_node **list);
+void						cmd_addback(t_command **lst, t_command *new);
+t_command						*cmd_lstlast(t_command *lst);
+t_file_node					*lstlast_dir(t_file_node *lst);
+void						lstadd_back_dir(t_file_node **lst, t_file_node *new_ld);
+t_file_node					*lstnew_dir(char *content, int len);
+int							wc_size(t_file_node *lst);
+int							cmd_size(t_command *lst);
+void						wc_clear(t_file_node **lst);
+void						cmd_clear(t_command **lst);
 char						*remove_q(char *s);
 void						ft_clear_av(char **str);
 void						put_line(char *line, int fd);

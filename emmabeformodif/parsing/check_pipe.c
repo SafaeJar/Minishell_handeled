@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:57:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 t_parser_node *check_pipe(t_lexer *lexer) {
-    if (lexer->curent_type.type != PIPE)
+    if (lexer->current_token.type != PIPE)
         return (void *)-1;
 
     t_parser_node *pipe_line = ft_pipe_line(lexer);
@@ -24,7 +24,7 @@ t_parser_node *check_pipe(t_lexer *lexer) {
 
     t_parser_node *pipe = node_create(NULL, NULL, PIPE);
     if (pipe)
-        pipe->right = pipe_line;
+        pipe->right_child = pipe_line;
 
     return pipe;
 }
@@ -36,7 +36,7 @@ t_parser_node *check_pipe(t_lexer *lexer) {
 // 	void			*ptr;
 
 // 	ptr = (void *)-1;
-// 	if (lexer->curent_type.type == PIPE)
+// 	if (lexer->current_token.type == PIPE)
 // 	{
 // 		pipe_line = ft_pipe_line(lexer);
 // 		if (!pipe_line || pipe_line == ptr)
@@ -48,7 +48,7 @@ t_parser_node *check_pipe(t_lexer *lexer) {
 // 		else
 // 		{
 // 			pipe = node_create(NULL, NULL, PIPE);
-// 			pipe->right = pipe_line;
+// 			pipe->right_child = pipe_line;
 // 			if (pipe)
 // 				return (pipe);
 // 		}

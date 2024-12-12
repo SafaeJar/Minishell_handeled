@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_search.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:42 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:19:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	expand_all(t_lexer *lexer, int var, int len)
 			return (token);
 		}
 	}
-	return (t_init(WORD, len, lexer->str));
+	return (t_init(WORD, len, lexer->current_position));
 }
 t_token	word_collect(t_lexer *lexer, int var, int len)
 {
@@ -33,7 +33,7 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 	char	*s;
 
 	mode = 0;
-	s = lexer->str;
+	s = lexer->current_position;
 	while (s[len] != '\0' && (mode != 0 || !ft_strchr(" \t\n|&()<>", s[len])))
 	{
 		mode = change_mode2(mode, s[len]);
@@ -50,7 +50,7 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 	}
 	if (var)
 		return (expand_all(lexer, var, len));
-	return (t_init(WORD, len, lexer->str));
+	return (t_init(WORD, len, lexer->current_position));
 }
 
 // t_token	word_collect(t_lexer *lexer, int var, int len)
@@ -59,7 +59,7 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 // 	char	*s;
 // 	t_token	token;
 
-// 	s = lexer->str;
+// 	s = lexer->current_position;
 // 	mode = 0;
 // 	while (s[len] != '\0' && (mode != 0 || (ft_strchr(" \t\n|&()<>", s[len]))))
 // 	{
@@ -71,7 +71,7 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 // 		len++;
 // 	}
 // 	if (!len)
-// 		return (t_init(TOK, 0, lexer->str));
+// 		return (t_init(TOK, 0, lexer->current_position));
 // 	if (mode != 0 && s[len] == '\0')
 // 		return (t_init(ENDF, 0, NULL));
 // 	token = expand_all(lexer, var, len);

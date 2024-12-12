@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_rdr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:16 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:52:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	get_heredoc_l(char *f, int fd, char *line, bool expand)
 	{
 		lexer = lex_init(line);
 		expanded = lex_var(*lexer, ft_strlen(lexer->input_string));
-		if (!expanded.pos)
+		if (!expanded.position)
 		{
 			close(fd);
 			unlink(f);
@@ -29,9 +29,9 @@ static int	get_heredoc_l(char *f, int fd, char *line, bool expand)
 			free(line);
 			return (-1);
 		}
-		put_line(expanded.pos, fd);
+		put_line(expanded.position, fd);
 		free(lexer);
-		free(expanded.pos);
+		free(expanded.position);
 	}
 	else
 		put_line(line, fd);
@@ -74,8 +74,8 @@ static char	*heredoc_filename(t_token t, char *delim)
 	bool		exp;
 	char		*n_file;
 
-	exp = !ft_memchr(t.pos, DEF_SINGEL_Q, t.len);
-	exp = (exp && !ft_memchr(t.pos, DEF_DOUBEL_Q, t.len));
+	exp = !ft_memchr(t.position, DEF_SINGEL_Q, t.len);
+	exp = (exp && !ft_memchr(t.position, DEF_DOUBEL_Q, t.len));
 	n_file = ft_itoa(i);
 	if (delim)
 		remove_q(delim);
@@ -99,9 +99,9 @@ static char	*rdr_filename(t_token file)
 	char	*s;
 
 	if (file.type == VARIABLE)
-		s = ft_substr(file.pos, 0, ft_strlen(file.pos));
+		s = ft_substr(file.position, 0, ft_strlen(file.position));
 	else
-		s = ft_substr(file.pos, 0, file.len);
+		s = ft_substr(file.position, 0, file.len);
 	return (s);
 }
 
@@ -112,10 +112,10 @@ if (token.type != WORD && token.type != VARIABLE)
 {
     ft_putstr_fd("minishell: syntax error near unexpected token", 2);
 
-    if (token.pos && token.len > 0) // Check if the token is non-empty
+    if (token.position && token.len > 0) // Check if the token is non-empty
     {
         write(2, "'", 1);
-        ft_putnstr(token.pos, token.len, 2); // Print the actual token
+        ft_putnstr(token.position, token.len, 2); // Print the actual token
         write(2, "'\n", 2);
     }
     else
@@ -133,9 +133,9 @@ if (token.type != WORD && token.type != VARIABLE)
 		return (NULL);
 	}
 	rdr->next = NULL;
-	rdr->type = lexer->prev_type.type;
+	rdr->type = lexer->prev_token.type;
 	if (rdr->type == HEREDOC)
-		rdr->file = heredoc_filename(token, ft_substr(token.pos, 0, token.len));
+		rdr->file = heredoc_filename(token, ft_substr(token.position, 0, token.len));
 	else
 		rdr->file = rdr_filename(token);
 	if (rdr->file)

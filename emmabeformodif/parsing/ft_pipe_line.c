@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:34 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:35 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:57:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 // t_parser_node *ft_pipe_line(t_lexer *lexer) {
-//     t_parser_node *cmd = collect_cmd(lexer);
+//     t_parser_node *cmd = collect_command(lexer);
 
 //     if (!cmd)
 //         return NULL;
@@ -21,10 +21,10 @@
 //     t_token token = get_next_token(lexer);
 //     if (token.type == PIPE) {
 //         t_parser_node *pipe = node_create(NULL, NULL, PIPE);
-//         pipe->left = cmd;
-//         pipe->right = ft_pipe_line(lexer);
+//         pipe->left_child = cmd;
+//         pipe->right_child = ft_pipe_line(lexer);
 
-//         if (!pipe->right) {
+//         if (!pipe->right_child) {
 //             printf("minishell: syntax error near unexpected token `|`\n");
 //             node_del(&pipe);
 //             return NULL;
@@ -41,7 +41,7 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 	void			*ptr;
 
 	ptr = (void *)-1;
-	cmd = collect_cmd(lexer);
+	cmd = collect_command(lexer);
 	
 	if (cmd && cmd != ptr)
 	{
@@ -49,7 +49,7 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 		if (pipe == ptr)
 			return (cmd);
 		if (pipe)
-			pipe->left = cmd;
+			pipe->left_child = cmd;
 
 		else
 			node_del(&cmd);

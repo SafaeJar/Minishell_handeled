@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:41 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:42 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:47:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_error(t_token token)
 	{
 		ft_putstr_fd("minishell: syntax error: unrecognized token ", 2);
 		write(2, "'", 1);
-		write(2, &token.pos[0], 1);
+		write(2, &token.position[0], 1);
 		write(2, "'\n", 2);
 	}
 	if (token.type == ERROR)

@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:55 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:56 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmd	*ft_new_cmd(char *content, t_wc_node **list)
+t_command	*ft_new_cmd(char *content, t_file_node **list)
 {
-	t_cmd	*s;
+	t_command	*s;
 
-	s = (t_cmd *)malloc(sizeof(t_cmd));
+	s = (t_command *)malloc(sizeof(t_command));
 	if (!s)
 		return (NULL);
 	s->word = content;
-	s->wc = NULL;
+	s->files = NULL;
 	s->next = NULL;
 	if (list)
-		s->wc = *list;
+		s->files = *list;
 	return (s);
 }
 
-void	cmd_addback(t_cmd **lst, t_cmd *new)
+void	cmd_addback(t_command **lst, t_command *new)
 {
-	t_cmd	*p;
+	t_command	*p;
 
 	if (!*lst)
 	{
@@ -40,7 +40,7 @@ void	cmd_addback(t_cmd **lst, t_cmd *new)
 	p->next = new;
 }
 
-t_cmd	*cmd_lstlast(t_cmd *lst)
+t_command	*cmd_lstlast(t_command *lst)
 {
 	if (!lst)
 		return (0);
@@ -49,7 +49,7 @@ t_cmd	*cmd_lstlast(t_cmd *lst)
 	return (lst);
 }
 
-int	cmd_size(t_cmd *lst)
+int	cmd_size(t_command *lst)
 {
 	int	i;
 
@@ -58,9 +58,9 @@ int	cmd_size(t_cmd *lst)
 		return (0);
 	while (lst)
 	{
-		if (lst->wc)
+		if (lst->files)
 		{
-			i += wc_size(lst->wc);
+			i += wc_size(lst->files);
 			lst = lst->next;
 		}
 		else
@@ -72,18 +72,18 @@ int	cmd_size(t_cmd *lst)
 	return (i);
 }
 
-void	cmd_clear(t_cmd **lst)
+void	cmd_clear(t_command **lst)
 {
-	t_cmd	*tmp;
+	t_command	*tmp;
 
 	tmp = 0;
 	if (!lst)
 		return ;
 	while (*lst)
 	{
-		if ((*lst)->wc)
+		if ((*lst)->files)
 		{
-			wc_clear(&(*lst)->wc);
+			wc_clear(&(*lst)->files);
 			tmp = *lst;
 			*lst = (*lst)->next;
 			free(tmp);

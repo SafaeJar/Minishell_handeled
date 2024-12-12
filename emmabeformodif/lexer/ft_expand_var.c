@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_var.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:30 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:53:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,15 @@ t_token	lex_var(t_lexer lexer, int len)
 	char	*full;
 
 	expnd = NULL;
-	if (lexer.prev_type.type == HEREDOC)
-		return (t_init(WORD, len, lexer.str));
+	if (lexer.prev_token.type == HEREDOC)
+		return (t_init(WORD, len, lexer.current_position));
 	full = ft_strdup("");
-	s = ft_substr(lexer.str, 0, len);
+	s = ft_substr(lexer.current_position, 0, len);
 	str = ft_split(s, DEF_DOUBEL_Q);
 	free(s);
 	full = lex_var2(str, full, s, expnd);
 	ft_clear_av(str);
 	if (full)
 		return (t_init(VARIABLE, len, full));
-	return (t_init(WORD, len, lexer.str));
+	return (t_init(WORD, len, lexer.current_position));
 }

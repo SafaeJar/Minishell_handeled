@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   wc_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:04 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:18:05 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:43:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_wc_node	*lstlast_dir(t_wc_node *lst)
+t_file_node	*lstlast_dir(t_file_node *lst)
 {
 	if (!lst)
 		return (0);
@@ -21,9 +21,9 @@ t_wc_node	*lstlast_dir(t_wc_node *lst)
 	return (lst);
 }
 
-void	lstadd_back_dir(t_wc_node **lst, t_wc_node *new_ld)
+void	lstadd_back_dir(t_file_node **lst, t_file_node *new_ld)
 {
-	t_wc_node	*p;
+	t_file_node	*p;
 
 	if (!*lst)
 	{
@@ -34,20 +34,20 @@ void	lstadd_back_dir(t_wc_node **lst, t_wc_node *new_ld)
 	p->next = new_ld;
 }
 
-t_wc_node	*lstnew_dir(char *content, int len)
+t_file_node	*lstnew_dir(char *content, int len)
 {
-	t_wc_node	*s;
+	t_file_node	*s;
 
-	s = (t_wc_node *)malloc(sizeof(t_wc_node));
+	s = (t_file_node *)malloc(sizeof(t_file_node));
 	if (s == NULL)
 		return (NULL);
-	s->d_name = content;
+	s->file_name = content;
 	s->len = len;
 	s->next = NULL;
 	return (s);
 }
 
-int	wc_size(t_wc_node *lst)
+int	wc_size(t_file_node *lst)
 {
 	int	i;
 
@@ -60,9 +60,9 @@ int	wc_size(t_wc_node *lst)
 	return (i);
 }
 
-void	wc_clear(t_wc_node **lst)
+void	wc_clear(t_file_node **lst)
 {
-	t_wc_node	*tmp;
+	t_file_node	*tmp;
 
 	tmp = 0;
 	if (!lst)
@@ -71,7 +71,7 @@ void	wc_clear(t_wc_node **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		free((tmp)->d_name);
+		free((tmp)->file_name);
 		free(tmp);
 	}
 }

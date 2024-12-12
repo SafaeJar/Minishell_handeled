@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_creat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:36 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:37 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:57:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	av_size(char **av)
 	return (i);
 }
 
-t_parser_node	*node_create(t_cmd **av, t_redirect_node *rdrlist, t_token_type tp)
+t_parser_node	*node_create(t_command **av, t_redirect_node *rdrlist, t_token_type tp)
 {
 	t_parser_node	*node;
 
@@ -32,7 +32,7 @@ t_parser_node	*node_create(t_cmd **av, t_redirect_node *rdrlist, t_token_type tp
 	if (!node)
 		return (NULL);
 	node->av = NULL;
-	node->rdrlst = NULL;
+	node->redirect_list = NULL;
 	if (av)
 	{
 		node->av = av_creat(av);
@@ -42,15 +42,15 @@ t_parser_node	*node_create(t_cmd **av, t_redirect_node *rdrlist, t_token_type tp
 	node->ac = av_size(node->av);
 	node->type = tp;
 	if (rdrlist)
-		node->rdrlst = rdrlist;
-	node->right = NULL;
-	node->left = NULL;
+		node->redirect_list = rdrlist;
+	node->right_child = NULL;
+	node->left_child = NULL;
 	return (node);
 }
 
 void	node_ptr(t_parser_node **node, t_parser_node *left,
 		t_parser_node *right)
 {
-	(*node)->right = right;
-	(*node)->left = left;
+	(*node)->right_child = right;
+	(*node)->left_child = left;
 }

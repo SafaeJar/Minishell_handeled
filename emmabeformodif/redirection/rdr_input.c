@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:49 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:50 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	execute_rdr_input_cmd(t_parser_node *node, t_out_in_file *file)
+void	execute_rdr_input_command(t_parser_node *node, t_out_in_file *file)
 {
 	int	pid;
 
@@ -63,7 +63,7 @@ void *rdr_input(t_parser_node *n, t_redirect_node *l, t_out_in_file *file, int v
     }
 
     if (v == 1 && file->input_file != -1 && file->output_file != -1) {
-        execute_rdr_input_cmd(n, file); // Execute only once
+        execute_rdr_input_command(n, file); // Execute only once
     }
     return NULL;
 }

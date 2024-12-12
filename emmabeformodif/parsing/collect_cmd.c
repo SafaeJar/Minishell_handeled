@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect_cmd.c                                      :+:      :+:    :+:   */
+/*   collect_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-t_parser_node	*collect_cmd(t_lexer *lexer)
+t_parser_node	*collect_command(t_lexer *lexer)
 {
-	t_cmd			*elem;
+	t_command			*elem;
 	t_parser_node	*node;
 	t_redirect_node		*rdrlst;
 	t_token			token;
@@ -27,7 +27,7 @@ t_parser_node	*collect_cmd(t_lexer *lexer)
 		&& token.type != END_OF_FILE)
 	{
 		if (token.type == VARIABLE)
-			free(token.pos);
+			free(token.position);
 		elem = cmd_ccomponents(lexer, &rdrlst);
 	}
 	if ((elem || rdrlst) && rdrlst != ptr)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:10:26 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:10:26 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:57:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ void	ft_pipe(t_parser_node *node)
 		return ;
 	pid = fork();
 	if (pid == 0)
-		execute_left_cmd(fd, node->left);
+		execute_left_command(fd, node->left_child);
 	pid = fork();
 	if (pid == 0)
-		execute_right_cmd(fd, node->right);
+		execute_right_command(fd, node->right_child);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(-1, &se.exit_status, 0);
 	waitpid(-1, &se.exit_status, 0);
 }
 
-void	execute_left_cmd(int *fd, t_parser_node *left)
+void	execute_left_command(int *fd, t_parser_node *left)
 {
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
@@ -64,7 +64,7 @@ void	execute_left_cmd(int *fd, t_parser_node *left)
 	exit(127);
 }
 
-void	execute_right_cmd(int *fd, t_parser_node *right)
+void	execute_right_command(int *fd, t_parser_node *right)
 {
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
@@ -80,7 +80,7 @@ void	execution(t_parser_node *node)
 		ft_pipe(node);
 	else if (node->type == COMMAND)
 	{
-		if (node->rdrlst)
+		if (node->redirect_list)
 			redirection(node);
 		else
 			run_command(node);

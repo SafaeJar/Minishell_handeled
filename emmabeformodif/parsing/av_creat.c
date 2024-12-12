@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   av_creat.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:05 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**iter_lst(t_cmd **lst, t_wc_node *tmp, t_cmd *cmd, char **av)
+char	**iter_lst(t_command **lst, t_file_node *tmp, t_command *cmd, char **av)
 {
 	int	i;
 
 	i = 0;
 	while (*lst)
 	{
-		if ((*lst)->wc)
+		if ((*lst)->files)
 		{
-			while ((*lst)->wc)
+			while ((*lst)->files)
 			{
-				av[i++] = (*lst)->wc->d_name;
-				tmp = (*lst)->wc;
-				(*lst)->wc = (*lst)->wc->next;
+				av[i++] = (*lst)->files->file_name;
+				tmp = (*lst)->files;
+				(*lst)->files = (*lst)->files->next;
 				free(tmp);
 			}
 		}
@@ -39,12 +39,12 @@ char	**iter_lst(t_cmd **lst, t_wc_node *tmp, t_cmd *cmd, char **av)
 	return (av);
 }
 
-char	**av_creat(t_cmd **lst)
+char	**av_creat(t_command **lst)
 {
 	char		**av;
 	int			size;
-	t_cmd		*cmd;
-	t_wc_node	*tmp;
+	t_command		*cmd;
+	t_file_node	*tmp;
 
 	cmd = NULL;
 	tmp = NULL;

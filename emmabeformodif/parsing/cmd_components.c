@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_components.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:09 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/11 17:47:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	handle_rdr(t_lexer *lexer, t_redirect_node **rdr, t_token token,
 	rdr_addback(rdr, tmp);
 }
 
-t_cmd	*cmd_ccomponents(t_lexer *lexer, t_redirect_node **rdr)
+t_command	*cmd_ccomponents(t_lexer *lexer, t_redirect_node **rdr)
 {
 	t_token		token;
-	t_cmd		*cmd;
+	t_command		*cmd;
 	t_redirect_node	*tmp;
 	void		*ptr;
 
@@ -45,10 +45,10 @@ t_cmd	*cmd_ccomponents(t_lexer *lexer, t_redirect_node **rdr)
 	{
 		token = get_next_token(lexer);
 		if (token.type == WORD)
-			cmd_addback(&cmd, ft_new_cmd(ft_substr(token.pos, 0, token.len),
+			cmd_addback(&cmd, ft_new_cmd(ft_substr(token.position, 0, token.len),
 					NULL));
 		else if (token.type == VARIABLE)
-			cmd_addback(&cmd, ft_new_cmd(token.pos, NULL));
+			cmd_addback(&cmd, ft_new_cmd(token.position, NULL));
 		else if (token.type == REDIRECT_APPEND || token.type == REDIRECT_INPUT
 			|| token.type == REDIRECT_OUTPUT || token.type == HEREDOC)
 			handle_rdr(lexer, rdr, token, tmp);
