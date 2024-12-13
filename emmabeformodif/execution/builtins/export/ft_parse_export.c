@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:01:07 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 22:47:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 23:52:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,8 @@ int	validate_identifier(char *name, char *content, int len, int err_opt)
 	int	j;
 
 	j = 0;
-	if (ft_isdigit(name[j]) && !*content)
-	{
-		return (printf("minishell: export: `%s': not a valid identifier\n",
-				name));
-	}
-	else if (ft_isdigit(name[j]))
-		return (printf("minishell: export: `%s=%s': not a valid identifier\n",
-				name, content));
-	if (name[j] == '-' && err_opt == 1)
-	{
-		printf("minishell: export: %s: invalid option \n", name);
-		printf("export: usage: export [name[=value]...] or export \n");
+	if (print_identifier_error(name, content, err_opt))
 		return (-1);
-	}
 	if (check_plus(name, content))
 		return (printf("minishell: export: `%s': not a valid identifier\n",
 				name));
@@ -110,11 +98,11 @@ int	parse_export_variable(t_envi_node *node, int _op_error)
 {
 	int	len;
 	int	check_parse;
-	
-	if(!strcmp(node->name, "\0"))
+
+	if (!strcmp(node->name, "\0"))
 	{
 		printf("export: '': not a valid identifier\n");
-		return(0);
+		return (0);
 	}
 	len = ft_strlen(node->name);
 	check_parse = validate_identifier(node->name, node->content, len,

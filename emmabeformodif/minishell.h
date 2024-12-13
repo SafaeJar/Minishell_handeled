@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 22:52:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 00:35:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,12 @@ void						delone_env(t_envi_node *node);
 void						free_env(char **env, int index);
 void						*handle_name_allocation_error(void *content);
 void						*handle_content_allocation_error(void);
-int							handle_digit_start(char *name, char *content);
-int							handle_invalid_option(char *name);
-int							check_invalid_characters(char *name, int len);
+int							print_identifier_error(char *name, char *content,
+								int err_opt);
+void						handle_existing_variable(t_envi_node *new,
+								int *index);
+t_token						handle_special_tokens(t_lexer *lexer);
+t_redirect_node				*handle_token_error(t_token token);
+t_redirect_node				*initialize_redirect_node(t_lexer *lexer,
+								t_token token, t_redirect_node *rdr);
 #endif

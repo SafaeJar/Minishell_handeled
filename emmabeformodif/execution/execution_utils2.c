@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 23:18:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 23:33:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ int	check_access(char *path, char **argv, char **env, int v)
 				free(path);
 		}
 		return (1);
-	}
-	return (0);
-}
-
-int	execute_file(char *path, char **argv, char **env, int v)
-{
-	if (check_access(path, argv, env, v))
-		return (1);
-	else if (v == 1)
-	{
-		printf("minishell: %s: command not found\n", argv[0]);
-		g_var.exit_status = 127 * 256;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:11:47 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 22:59:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 23:35:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,6 @@ char	**copy_env(int size, int index)
 	}
 	env[index] = NULL;
 	return (env);
-}
-
-void	free_env(char **env, int index)
-{
-	int	i;
-
-	i = 0;
-	while (i < index)
-	{
-		free(env[i]);
-		i++;
-	}
-	if (index == -1)
-	{
-		while (env[i])
-		{
-			free(env[i]);
-			i++;
-		}
-	}
-	free(env);
 }
 
 void	copy_argv_for_execve(char **root_argv, char **args, char *first_arg)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:03:26 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 22:21:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 00:04:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_envi_node	*find_min_variable(void)
 	min_var = NULL;
 	while (tmp)
 	{
-		if ((!min_var || ft_strcmp(tmp->name, min_var->name) < 0) && tmp->len
-			!= -1)
+		if ((!min_var || ft_strcmp(tmp->name, min_var->name) < 0)
+			&& tmp->len != -1)
 			min_var = tmp;
 		tmp = tmp->next;
 	}

@@ -62,6 +62,7 @@ SRCS = 	envirenement/creation_envi.c \
 		execution/execution_utils.c\
 		execution/execution_utils2.c\
 		execution/execution.c\
+		execution/execution_utils3.c \
 		execution/builtins/cd/ft_cd_utils.c\
 		execution/builtins/cd/ft_cd.c\
 		execution/builtins/ft_echo.c\
@@ -70,8 +71,8 @@ SRCS = 	envirenement/creation_envi.c \
 		execution/builtins/ft_unset.c\
 		execution/builtins/export/ft_export_utils.c\
 		execution/builtins/export/ft_parse_export.c\
-		execution/builtins/export/errors_parse_export.c\
 		execution/builtins/export/ft_export.c\
+		execution/builtins/export/print_errors.c\
 		execution/builtins/ft_exit.c\
 		redirection/redirection.c\
 		redirection/heredoc.c\
