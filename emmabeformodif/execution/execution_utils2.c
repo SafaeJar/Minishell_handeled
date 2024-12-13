@@ -6,7 +6,7 @@
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 00:43:46 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 14:47:26 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	*launch_executable(t_parser_node *root, int size)
 		if (!launch(root, env))
 		{
 			write(2, "minishell: ", 11);
-            write(2, root->av[0], strlen(root->av[0]));
+            write(2, root->av[0], ft_strlen(root->av[0]));
             write(2, ": command not found\n", 20);
 		}
 			//printf("minishell: %s: command not found\n", root->av[0]);

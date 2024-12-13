@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:34 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:57:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 15:32:17 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 //         return pipe;
 //     }
 //     return cmd;
-// }
+// }z
 
 t_parser_node	*ft_pipe_line(t_lexer *lexer)
 {

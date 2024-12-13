@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:04:22 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:04:23 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 17:14:32 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_env(t_parser_node *node, int argc)
 			printf("env: '%s': No such file or directory\n", node->av[1]);
 			se.exit_status = 127;
 		}
+		//printf("hnaya%s",node->av[1]);
 	}
 	else
 	{

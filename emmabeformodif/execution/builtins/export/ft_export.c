@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:14:00 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 17:14:01 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 17:27:55 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	add_variables_to_env(char **argv, int index)
 	int			check;
 
 	se.exit_status = 0;
+	if(argv[index][0] == '\0')
+		return;
 	while (argv[index])
 	{
 		if (argv[index][0] == ';' || argv[index][0] == '#')

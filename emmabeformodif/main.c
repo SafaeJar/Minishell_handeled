@@ -6,7 +6,7 @@
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 01:16:25 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 16:41:46 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 2 && !argv[1])
 	{
 		se.list = creer_envi(env);
-		ft_list_remove_if(&se.list, "OLDPWD");
+		//ft_list_remove_if(&se.list, "OLDPWD");
 		while (1)
 		{
 			handle_signal(SIG_DEFAULT);
