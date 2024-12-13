@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 16:41:46 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:07:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_shell_vars	se;
+t_shell_vars	g_var;
 
 void	check_sigquit_(void)
 {
-	if (WIFSIGNALED(se.exit_status))
+	if (WIFSIGNALED(g_var.exit_status))
 	{
-		if (se.check_sigint == 0)
-			se.exit_status = 130 * 256;
-		else if (se.check_sigquit == 1)
-			se.exit_status = 131 * 256;
+		if (g_var.check_sigint == 0)
+			g_var.exit_status = 130 * 256;
+		else if (g_var.check_sigquit == 1)
+			g_var.exit_status = 131 * 256;
 	}
 }
 
@@ -29,7 +29,7 @@ void	afficher_liste_env(void)
 {
 	t_envi_node	*temp;
 
-	temp = se.list;
+	temp = g_var.list;
 	while (temp)
 	{
 		printf("%s=%s\n", temp->name, temp->content);
@@ -56,11 +56,11 @@ int	main(int argc, char **argv, char **env)
 	char			*line;
 
 	tree = NULL;
-	line =NULL;
+	line = NULL;
 	if (argc < 2 && !argv[1])
 	{
-		se.list = creer_envi(env);
-		//ft_list_remove_if(&se.list, "OLDPWD");
+		g_var.list = creer_envi(env);
+		ft_list_remove_if(&g_var.list, "OLDPWD");
 		while (1)
 		{
 			handle_signal(SIG_DEFAULT);
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **env)
 			tree = parse(line);
 			if (tree)
 			{
-				if (se.check_sigint == 0)
+				if (g_var.check_sigint == 0)
 					execution(tree);
 				node_del(&tree);
 			}

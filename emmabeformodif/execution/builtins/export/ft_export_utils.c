@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:03:26 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:03:27 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 22:21:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_envi_node	*find_max_variable(void)
 	t_envi_node	*head;
 	t_envi_node	*max_var;
 
-	head = se.list;
+	head = g_var.list;
 	max_var = NULL;
 	while (head)
 	{
@@ -33,7 +33,7 @@ t_envi_node	*find_min_variable(void)
 	t_envi_node	*tmp;
 	t_envi_node	*min_var;
 
-	tmp = se.list;
+	tmp = g_var.list;
 	min_var = NULL;
 	while (tmp)
 	{
@@ -85,6 +85,6 @@ int	remove_variable_if_path_empty(t_envi_node *var_node, int *index)
 		return (1);
 	}
 	else
-		ft_list_remove_if(&se.list, var_node->name);
+		ft_list_remove_if(&g_var.list, var_node->name);
 	return (0);
 }

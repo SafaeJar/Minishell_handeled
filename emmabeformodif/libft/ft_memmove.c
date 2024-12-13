@@ -16,7 +16,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
 	const unsigned char	*s;
-	
+
 	d = (unsigned char *)dest;
 	s = (const unsigned char *)src;
 	if (src >= dest)
@@ -34,19 +34,19 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (d);
 }
 /*
-int	main(void) 
-{ 
-    char str[100] = "Learningisfun"; 
-    char *first, *second; 
-    first = str; 
-    second = str; 
-    printf("Original string :%s\n ", str); 
-      
-    memcpy(first + 8, first, 10); 
-    printf("memcpy overlap : %s\n ", str); 
+int	main(void)
+{
+	char str[100] = "Learningisfun";
+	char *first, *second;
+	first = str;
+	second = str;
+	printf("Original string :%s\n ", str);
 
-    memmove(second + 8, first, 10); 
-    printf("memmove overlap : %s\n ", str); 
-  
-    return (0); 
+	memcpy(first + 8, first, 10);
+	printf("memcpy overlap : %s\n ", str);
+
+	memmove(second + 8, first, 10);
+	printf("memmove overlap : %s\n ", str);
+
+	return (0);
 }*/

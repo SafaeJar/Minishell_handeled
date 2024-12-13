@@ -36,24 +36,24 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 /*
 char	transform(unsigned int index, char c) {
-    if(c>= 'a' && c<= 'z')
-    return (char)(c - 32);
-    else 
-    return (char)(c);
+	if(c>= 'a' && c<= 'z')
+	return (char)(c - 32);
+	else
+	return (char)(c);
 }
 
 int	main(void) {
-    const char *original = "hello, world!";
-    
-    char *result = ft_strmapi(original, &transform);
+	const char *original = "hello, world!";
 
-    if (!result) {
-        fprintf(stderr, "Erreur d'allocation de mémoire\n");
-   
-    }
+	char *result = ft_strmapi(original, &transform);
 
-    printf("Chaine d'origine : %s\n", original);
-    printf("Resultat transforme : %s\n", result);
+	if (!result) {
+		fprintf(stderr, "Erreur d'allocation de mémoire\n");
+
+	}
+
+	printf("Chaine d'origine : %s\n", original);
+	printf("Resultat transforme : %s\n", result);
 
 
 }

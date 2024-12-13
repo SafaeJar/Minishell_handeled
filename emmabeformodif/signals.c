@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:10 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:18:11 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	df_sigint(int sig)
 {
 	(void)sig;
-	se.exit_status = 130;
-	se.check_sigint = 1;
+	g_var.exit_status = 130;
+	g_var.check_sigint = 1;
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
 	rl_replace_line("", 1);
@@ -27,19 +27,19 @@ void	heredoc_sigint(int sig)
 {
 	(void)sig;
 	ft_putchar_fd('\n', 1);
-	se.exit_status = 130;
-	se.check_sigint = 1;
+	g_var.exit_status = 130;
+	g_var.check_sigint = 1;
 	rl_on_new_line();
 	rl_replace_line("", 1);
-	exit(se.exit_status);
+	exit(g_var.exit_status);
 	rl_redisplay();
 }
 
 void	child_sigint(int sig)
 {
 	(void)sig;
-	se.exit_status = 130;
-	se.check_sigint = 1;
+	g_var.exit_status = 130;
+	g_var.check_sigint = 1;
 	ft_putchar_fd('\n', 1);
 	rl_on_new_line();
 	rl_replace_line("", 1);

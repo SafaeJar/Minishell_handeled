@@ -45,10 +45,11 @@ void	execute_heredoc_cmd(t_parser_node *node, t_out_in_file *file)
 	waitpid(pid, NULL, 0);
 }
 
-void	*herdoc_(t_parser_node *n, t_redirect_node *lst, t_out_in_file *file, int v)
+void	*herdoc_(t_parser_node *n, t_redirect_node *lst, t_out_in_file *file,
+		int v)
 {
 	t_redirect_node	*head;
-	char		*tmp;
+	char			*tmp;
 
 	tmp = get_herdoc_file(lst);
 	file->input_file = open(tmp, O_RDWR, 0777);

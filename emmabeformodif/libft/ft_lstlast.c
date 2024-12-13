@@ -29,24 +29,24 @@ int	main(void)
 	t_list	*node3;
 	t_list	*lastNode;
 
-    node1 = malloc(sizeof(t_list));
-    node2 = malloc(sizeof(t_list));
-    node3 = malloc(sizeof(t_list));
-    node1->content = "Premier";
-    node1->next = node2;
-    node2->content = "Deuxième";
-    node2->next = node3;
-    node3->content = "Troisième";
-    node3->next = NULL; 
-    lastNode = ft_lstlast(node1);
-    if (lastNode)
-        printf("Le contenu du dernier élément de la liste est : %s\n",
+	node1 = malloc(sizeof(t_list));
+	node2 = malloc(sizeof(t_list));
+	node3 = malloc(sizeof(t_list));
+	node1->content = "Premier";
+	node1->next = node2;
+	node2->content = "Deuxième";
+	node2->next = node3;
+	node3->content = "Troisième";
+	node3->next = NULL;
+	lastNode = ft_lstlast(node1);
+	if (lastNode)
+		printf("Le contenu du dernier élément de la liste est : %s\n",
 		(char *)lastNode->content);
-    else
-        printf("La liste est vide.\n");
-    free(node1);
-    free(node2);
-    free(node3);
-    return (0);
+	else
+		printf("La liste est vide.\n");
+	free(node1);
+	free(node2);
+	free(node3);
+	return (0);
 }
 */

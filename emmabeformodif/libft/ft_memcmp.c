@@ -31,10 +31,10 @@ int	ft_memcmp(const void *buf1, const void *buf2, size_t count)
 /*
 int	main(void)
 {
-    char *s1="\0\0jdshgjhbgjh\0\0dkjasgh";
-    char *s2="aaaa";
-    int x=memcmp(s1,s2,15);
-    int y= ft_memcmp(s1,s2,15);
-    printf("my function's return (: %d\n",y));
-    printf("string.h function's return (: %d\n",x));
+	char *s1="\0\0jdshgjhbgjh\0\0dkjasgh";
+	char *s2="aaaa";
+	int x=memcmp(s1,s2,15);
+	int y= ft_memcmp(s1,s2,15);
+	printf("my function's return (: %d\n",y));
+	printf("string.h function's return (: %d\n",x));
 }*/

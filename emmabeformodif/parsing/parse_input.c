@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:39 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:40 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:14:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_parser_node	*parse_input(t_lexer *lexer)
 {
 	t_parser_node	*pipeline;
 	t_token			token;
+
 	pipeline = ft_pipe_line(lexer);
 	if (!pipeline || pipeline == (void *)-1)
 		return (pipeline);
@@ -23,7 +24,6 @@ t_parser_node	*parse_input(t_lexer *lexer)
 	if (token.type != END)
 	{
 		print_error(token);
-		//printf("here");
 		node_del(&pipeline);
 		return (NULL);
 	}

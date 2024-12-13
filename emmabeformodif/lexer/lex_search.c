@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_search.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:42 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 15:32:59 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:07:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_token	expand_all(t_lexer *lexer, int var, int len)
 	}
 	return (t_init(WORD, len, lexer->current_position));
 }
+
 t_token	word_collect(t_lexer *lexer, int var, int len)
 {
 	int		mode;
@@ -38,8 +39,8 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 	{
 		mode = change_mode2(mode, s[len]);
 		if (s[len] == '$' && mode != 1)
-			var = 1; // Mark variable expansion
-		if (s[len] == '\\' && s[len + 1]) // Handle escapes
+			var = 1;
+		if (s[len] == '\\' && s[len + 1])
 			len++;
 		len++;
 	}

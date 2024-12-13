@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_rdr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:16 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 15:31:48 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	heredoc_handler(char *f, char *delim, bool expand)
 	line = readline(">");
 	while (line)
 	{
-		if (se.check_sigint == 1 || !ft_strcmp(line, delim))
+		if (g_var.check_sigint == 1 || !ft_strcmp(line, delim))
 			break ;
 		if (get_heredoc_l(f, fd, line, expand))
 			return (-1);
@@ -105,27 +105,25 @@ static char	*rdr_filename(t_token file)
 	return (s);
 }
 
-t_redirect_node	*collect_rdr(t_lexer *lexer, t_redirect_node *rdr, t_token token)
+t_redirect_node	*collect_rdr(t_lexer *lexer, t_redirect_node *rdr,
+		t_token token)
 {
 	token = get_next_token(lexer);
-if (token.type != WORD && token.type != VARIABLE)
-{
-    ft_putstr_fd("minishell: syntax error near unexpected token", 2);
-
-    if (token.position && token.len > 0)
-    {
-        write(2, "'", 1);
-        ft_putnstr(token.position, token.len, 2);
-        write(2, "'\n", 2);
-    }
-    else
-    {
-        ft_putstr_fd("`newline'\n", 2);
-    }
-
-    return ((void *)-1);
-}
-
+	if (token.type != WORD && token.type != VARIABLE)
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token", 2);
+		if (token.position && token.len > 0)
+		{
+			write(2, "'", 1);
+			ft_putnstr(token.position, token.len, 2);
+			write(2, "'\n", 2);
+		}
+		else
+		{
+			ft_putstr_fd("`newline'\n", 2);
+		}
+		return ((void *)-1);
+	}
 	rdr = malloc(sizeof(t_redirect_node));
 	if (!rdr)
 	{
@@ -135,7 +133,8 @@ if (token.type != WORD && token.type != VARIABLE)
 	rdr->next = NULL;
 	rdr->type = lexer->prev_token.type;
 	if (rdr->type == HEREDOC)
-		rdr->file = heredoc_filename(token, ft_substr(token.position, 0, token.len));
+		rdr->file = heredoc_filename(token, ft_substr(token.position, 0,
+					token.len));
 	else
 		rdr->file = rdr_filename(token);
 	if (rdr->file)

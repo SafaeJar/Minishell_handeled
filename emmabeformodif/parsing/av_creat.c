@@ -43,7 +43,7 @@ char	**av_creat(t_command **lst)
 {
 	char		**av;
 	int			size;
-	t_command		*cmd;
+	t_command	*cmd;
 	t_file_node	*tmp;
 
 	cmd = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:01:07 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/12 23:45:39 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 22:47:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	handle_parse_errors(t_envi_node *new, int parse_result, int *i)
 	{
 		if (parse_result == -1 && *i == 1)
 		{
-			se.exit_status = 512;
+			g_var.exit_status = 512;
 			delone_env(new);
 			return (2);
 		}
@@ -75,9 +75,7 @@ int	validate_identifier(char *name, char *content, int len, int err_opt)
 		if (((name[j] <= 64 && !ft_isdigit(name[j])) || (name[j] >= 91
 					&& name[j] <= 96 && name[j] != '_') || name[j] >= 123)
 			&& name[len - 1] != '+')
-			return(1);
-			//return (printf("export:: command not found\n"));
-
+			return (1);
 		j++;
 	}
 	return (0);
@@ -95,7 +93,7 @@ void	*concatenate_variable(t_envi_node *node)
 	free(node->name);
 	node->name = tmp_name;
 	node->len = ft_strlen(node->name);
-	existing_node = var_find(se.list, node->name);
+	existing_node = var_find(g_var.list, node->name);
 	if (existing_node && node->content[0] != '\0' && ft_strcmp(node->content,
 			"\"\""))
 	{
@@ -112,7 +110,12 @@ int	parse_export_variable(t_envi_node *node, int _op_error)
 {
 	int	len;
 	int	check_parse;
-
+	
+	if(!strcmp(node->name, "\0"))
+	{
+		printf("export: '': not a valid identifier\n");
+		return(0);
+	}
 	len = ft_strlen(node->name);
 	check_parse = validate_identifier(node->name, node->content, len,
 			_op_error);
@@ -120,7 +123,7 @@ int	parse_export_variable(t_envi_node *node, int _op_error)
 	{
 		if (check_parse == -1)
 			return (-1);
-		se.exit_status = 256;
+		g_var.exit_status = 256;
 		return (1);
 	}
 	if (node->name[len - 1] == '+' && node->len != 1)

@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:02 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:18:03 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
 void	free_env_list(void)
 {
 	t_envi_node	*head;
 
-	head = se.list;
+	head = g_var.list;
 	while (head)
 	{
 		delone_env(head);

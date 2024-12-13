@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:11:47 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 14:46:12 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 22:59:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	clear_path_content(char **split_content)
 
 int	check_path(char *path)
 {
-	if(!path)
-		return(0);
+	if (!path)
+		return (0);
 	return (path[0] == '/' || (path[0] == '.' && path[1] == '/'));
 }
 
@@ -38,7 +38,7 @@ char	**copy_env(int size, int index)
 	env = malloc((size + 1) * sizeof(char *));
 	if (!env)
 		return (perror("minishell malloc"), NULL);
-	head = se.list;
+	head = g_var.list;
 	while (head && index < size)
 	{
 		name_eq = ft_strjoin(head->name, "=");

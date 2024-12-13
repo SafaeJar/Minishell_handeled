@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 00:40:29 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 22:52:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define DEF_SINGEL_Q -1// Represents a single quote (')
-# define DEF_DOUBEL_Q -2//Represents a double quote (")
+# define DEF_SINGEL_Q -1 // Represents a single quote (')
+# define DEF_DOUBEL_Q -2 // Represents a double quote (")
 ///////////////////////////////////////////
 typedef enum e_sig_state
 {
@@ -51,61 +51,61 @@ typedef struct s_envi_node
 }							t_envi_node;
 typedef enum e_token_type
 {
-	TOKEN_NULL,// Caractère nul
-	TOKEN,// Représente un token générique
-	END_OF_FILE,// Fin de fichier
-	COMMAND,// Commande
-	VARIABLE,// Variable (exemple : $VAR_NAME)
-	REDIRECT_INPUT,// Redirection d'entrée ("<")
-	REDIRECT_OUTPUT,// Redirection de sortie (">")
-	HEREDOC,// Heredoc ("<<")
-	REDIRECT_APPEND,// Redirection avec ajout (">>")
-	PIPE,// Opérateur de pipe ("|")
-	WORD,// Mot générique (exemple : un argument)
-	ERROR,// Erreur de parsing
-	END,// Fin de ligne
+	TOKEN_NULL,
+	TOKEN,
+	END_OF_FILE,
+	COMMAND,
+	VARIABLE,
+	REDIRECT_INPUT,
+	REDIRECT_OUTPUT,
+	HEREDOC,
+	REDIRECT_APPEND,
+	PIPE,
+	WORD,
+	ERROR,
+	END,
 }							t_token_type;
 
 typedef struct token
 {
 	int						len;
-	char					*position;//Pointer to the position of the token in the input string
+	char					*position;
 	t_token_type			type;
 }							t_token;
 typedef struct s_lexer
 {
-	char					*input_string;//The full input string being tokenized
-	char					*current_position;//Pointer to the current position in the string
-	t_token					prev_token;//The previous token identified
-	t_token					current_token;// The current token being analyzed.
+	char					*input_string;
+	char					*current_position;
+	t_token					prev_token;
+	t_token					current_token;
 }							t_lexer;
 typedef struct s_redirect_node
 {
 	t_token_type			type;
-	char					*file;//File associated with the redirection
+	char					*file;
 	struct s_redirect_node	*next;
 }							t_redirect_node;
 typedef struct s_parser_node
 {
-	t_token_type			type;//Type of the node
+	t_token_type			type;
 	char					**av;
 	int						ac;
-	t_redirect_node			*redirect_list;//List of redirections for this node.
+	t_redirect_node			*redirect_list;
 	struct s_parser_node	*left_child;
 	struct s_parser_node	*right_child;
 }							t_parser_node;
 typedef struct s_file_node
 {
-	char					*file_name;// The name of the file
+	char					*file_name;
 	int						len;
 	struct s_file_node		*next;
 }							t_file_node;
 
 typedef struct s_command
 {
-	t_file_node				*files;//Associated file nodes
-	char					*word;//The command or argument word
-	struct s_command			*next;
+	t_file_node				*files;
+	char					*word;
+	struct s_command		*next;
 }							t_command;
 typedef struct s_out_in_file
 {
@@ -119,9 +119,8 @@ typedef struct s_shell_vars
 	int						check_sigquit;
 	int						exit_status;
 }							t_shell_vars;
-extern t_shell_vars			se;
+extern t_shell_vars			g_var;
 
-//int			access_args(char **argv, int argc);
 char						*get_user_input(char *prompt);
 void						afficher_liste_env(void);
 void						ft_list_remove_if(t_envi_node **begin_list,
@@ -135,18 +134,18 @@ void						add_dernier(t_envi_node **lst, t_envi_node *new);
 t_envi_node					*creer_envi(char **env);
 void						_set_pwd(t_envi_node **lst);
 void						_shell_level(t_envi_node **lst);
-t_envi_node					*add_env_node(t_envi_node *var, char *s,int i);
+t_envi_node					*add_env_node(t_envi_node *var, char *s, int i);
 void						handler(int signum);
 void						child_sigint(int sig);
 void						heredoc_sigint(int sig);
 void						df_sigint(int sig);
-// void	free_env(void);
 void						execution(t_parser_node *node);
 void						ft_pipe(t_parser_node *node);
-void						execute_right_command(int *fd, t_parser_node *right);
+void						execute_right_command(int *fd,
+								t_parser_node *right);
 void						execute_left_command(int *fd, t_parser_node *left);
 void						run_command(t_parser_node *node);
-void						ft_unset(t_parser_node *node);
+void						ft_unset(t_parser_node *node, int a);
 void						unset_variable(char *argv, int *check);
 void						ft_pwd(void);
 void						ft_exit(t_parser_node *node);
@@ -171,7 +170,7 @@ void						add_variables_to_env(char **argv, int index);
 int							remove_variable_if_path_empty(t_envi_node *var_node,
 								int *index);
 t_envi_node					*create_new_node(char *variable_content);
-t_envi_node					*find_min_variable();
+t_envi_node					*find_min_variable(void);
 t_envi_node					*find_max_variable(void);
 void						ft_cd(char *path, int argc);
 void						go_to_newpath(const char *path, char *current_dir);
@@ -182,11 +181,12 @@ void						update_env_var(t_envi_node **env_list, char *name,
 								char *content);
 void						add_new_env_var(t_envi_node **env_list, char *name,
 								char *content);
-/////////////////////////////////
 void						*rdr_input(t_parser_node *n, t_redirect_node *l,
 								t_out_in_file *file, int v);
 void						*rdr_output(t_parser_node *n, t_redirect_node *l,
 								t_out_in_file *file, int v);
+int							check_access(char *path, char **argv, char **env,
+								int v);
 void						*herdoc_(t_parser_node *n, t_redirect_node *l,
 								t_out_in_file *file, int v);
 char						*get_herdoc_file(t_redirect_node *rdrlst);
@@ -206,10 +206,10 @@ t_parser_node				*ft_pipe_line(t_lexer *lexer);
 t_parser_node				*collect_command(t_lexer *lexer);
 t_parser_node				*parse(char *input);
 t_parser_node				*parse_input(t_lexer *lexer);
-t_command						*cmd_ccomponents(t_lexer *lexer,
+t_command					*cmd_ccomponents(t_lexer *lexer,
 								t_redirect_node **rdr);
-t_parser_node				*node_create(t_command **av, t_redirect_node *rdrlist,
-								t_token_type tp);
+t_parser_node				*node_create(t_command **av,
+								t_redirect_node *rdrlist, t_token_type tp);
 char						**av_creat(t_command **list);
 t_redirect_node				*collect_rdr(t_lexer *lexer, t_redirect_node *rdr,
 								t_token token);
@@ -229,18 +229,19 @@ t_lexer						*lex_init(char *s);
 t_token						word_collect(t_lexer *lexer, int var, int len);
 t_token						get_token(t_lexer *lexer);
 t_token						get_next_token(t_lexer *lexer);
-t_token						t_wc_init(t_token_type type, int len, t_file_node *p,
-								char *pos);
+t_token						t_wc_init(t_token_type type, int len,
+								t_file_node *p, char *pos);
 t_token						lex_var(t_lexer lexer, int len);
 int							change_mode2(int i, char c);
 char						*exp_var(char **sp);
 char						*exit_status(char **s);
 char						*ft_exp(char *expnd, char **s);
-t_command						*ft_new_cmd(char *content, t_file_node **list);
+t_command					*ft_new_cmd(char *content, t_file_node **list);
 void						cmd_addback(t_command **lst, t_command *new);
-t_command						*cmd_lstlast(t_command *lst);
+t_command					*cmd_lstlast(t_command *lst);
 t_file_node					*lstlast_dir(t_file_node *lst);
-void						lstadd_back_dir(t_file_node **lst, t_file_node *new_ld);
+void						lstadd_back_dir(t_file_node **lst,
+								t_file_node *new_ld);
 t_file_node					*lstnew_dir(char *content, int len);
 int							wc_size(t_file_node *lst);
 int							cmd_size(t_command *lst);
@@ -258,9 +259,9 @@ char						*env_find2(t_envi_node *env, char *s, int len);
 int							env_find3(t_envi_node *env, char *s);
 void						delone_env(t_envi_node *node);
 void						free_env(char **env, int index);
-void *handle_name_allocation_error(void *content);
-void *handle_content_allocation_error();
-int handle_digit_start(char *name, char *content);
-int handle_invalid_option(char *name);
-int check_invalid_characters(char *name, int len);
+void						*handle_name_allocation_error(void *content);
+void						*handle_content_allocation_error(void);
+int							handle_digit_start(char *name, char *content);
+int							handle_invalid_option(char *name);
+int							check_invalid_characters(char *name, int len);
 #endif

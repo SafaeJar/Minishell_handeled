@@ -20,7 +20,8 @@ void	redirection(t_parser_node *node)
 	in_out_file.input_file = 0;
 	if (node->redirect_list->type == HEREDOC)
 		herdoc_(node, node->redirect_list, &in_out_file, 1);
-	else if (node->redirect_list->type == REDIRECT_OUTPUT || node->redirect_list->type == REDIRECT_APPEND)
+	else if (node->redirect_list->type == REDIRECT_OUTPUT
+		|| node->redirect_list->type == REDIRECT_APPEND)
 		rdr_output(node, node->redirect_list, &in_out_file, 1);
 	else if (node->redirect_list->type == REDIRECT_INPUT)
 		rdr_input(node, node->redirect_list, &in_out_file, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:05:44 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 17:05:45 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	add_new_env_var(t_envi_node **env_list, char *name, char *content)
 		|| !(new_node->content))
 	{
 		printf("minishell: memory allocation failed\n");
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		free(new_node);
 		return ;
 	}
@@ -44,7 +44,7 @@ void	update_env_var(t_envi_node **env_list, char *name, char *content)
 		if (!env_node->content)
 		{
 			printf("minishell: memory allocation failed\n");
-			se.exit_status = 1;
+			g_var.exit_status = 1;
 			return ;
 		}
 		env_node->len = ft_strlen(content);
@@ -59,24 +59,24 @@ void	go_to_home(char *current_dir)
 {
 	t_envi_node	*home_env;
 
-	home_env = var_find(se.list, "HOME");
+	home_env = var_find(g_var.list, "HOME");
 	if (!home_env || !home_env->content)
 	{
 		printf("minishell: cd: HOME not set\n");
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		return ;
 	}
 	if (chdir(home_env->content) != 0)
 	{
 		perror("cd");
 		free(current_dir);
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		return ;
 	}
-	update_env_var(&se.list, "OLDPWD", current_dir);
-	update_env_var(&se.list, "PWD", home_env->content);
+	update_env_var(&g_var.list, "OLDPWD", current_dir);
+	update_env_var(&g_var.list, "PWD", home_env->content);
 	free(current_dir);
-	se.exit_status = 0;
+	g_var.exit_status = 0;
 }
 
 void	go_to_oldpath(t_envi_node *oldpwd, char *current_dir)
@@ -84,19 +84,19 @@ void	go_to_oldpath(t_envi_node *oldpwd, char *current_dir)
 	if (!oldpwd || !oldpwd->content)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		return ;
 	}
 	if (chdir(oldpwd->content) != 0)
 	{
 		perror("cd");
 		free(current_dir);
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		return ;
 	}
 	printf("%s\n", oldpwd->content);
-	update_env_var(&se.list, "OLDPWD", current_dir);
-	update_env_var(&se.list, "PWD", oldpwd->content);
+	update_env_var(&g_var.list, "OLDPWD", current_dir);
+	update_env_var(&g_var.list, "PWD", oldpwd->content);
 	free(current_dir);
-	se.exit_status = 0;
+	g_var.exit_status = 0;
 }

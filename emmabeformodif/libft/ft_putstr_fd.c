@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:58:58 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/11/25 09:33:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:08:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
 void	ft_putnstr(char *s, int len, int fd)
 {
 	int	i;

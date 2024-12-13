@@ -40,18 +40,18 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 }
 /*
 
-    const char *chaine = "Bonjour, monde !";
-    const char *sous_chaine = "monde";
-    size_t longueur_max = 15;
+	const char *chaine = "Bonjour, monde !";
+	const char *sous_chaine = "monde";
+	size_t longueur_max = 15;
 
-    const char *resultat=ft_strnstr(chaine,sous_chaine,16);
+	const char *resultat=ft_strnstr(chaine,sous_chaine,16);
 
-    if (resultat != NULL) {
-        printf("La sous-chaîne a été trouvée à l'indice : %ld c est : %s\n",
+	if (resultat != NULL) {
+		printf("La sous-chaîne a été trouvée à l'indice : %ld c est : %s\n",
 		(resultat - chaine),resultat);
-    } else {
-        printf("La sous-chaîne n'a pas été trouvée. resultat : %s\n",resultat);
-    }
+	} else {
+		printf("La sous-chaîne n'a pas été trouvée. resultat : %s\n",resultat);
+	}
 
-    return (0);
+	return (0);
 }*/

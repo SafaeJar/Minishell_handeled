@@ -16,7 +16,7 @@
 //     t_parser_node *cmd = collect_command(lexer);
 
 //     if (!cmd)
-//         return NULL;
+//         return (NULL);
 
 //     t_token token = get_next_token(lexer);
 //     if (token.type == PIPE) {
@@ -27,11 +27,11 @@
 //         if (!pipe->right_child) {
 //             printf("minishell: syntax error near unexpected token `|`\n");
 //             node_del(&pipe);
-//             return NULL;
+//             return (NULL);
 //         }
-//         return pipe;
+//         return (pipe);
 //     }
-//     return cmd;
+//     return (cmd);
 // }z
 
 t_parser_node	*ft_pipe_line(t_lexer *lexer)
@@ -42,7 +42,6 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 
 	ptr = (void *)-1;
 	cmd = collect_command(lexer);
-	
 	if (cmd && cmd != ptr)
 	{
 		pipe = check_pipe(lexer);
@@ -50,7 +49,6 @@ t_parser_node	*ft_pipe_line(t_lexer *lexer)
 			return (cmd);
 		if (pipe)
 			pipe->left_child = cmd;
-
 		else
 			node_del(&cmd);
 		return (pipe);

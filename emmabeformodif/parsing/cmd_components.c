@@ -15,7 +15,7 @@
 void	handle_rdr(t_lexer *lexer, t_redirect_node **rdr, t_token token,
 		t_redirect_node *tmp)
 {
-	void			*ptr;
+	void	*ptr;
 
 	ptr = (void *)-1;
 	tmp = collect_rdr(lexer, *rdr, token);
@@ -31,10 +31,10 @@ void	handle_rdr(t_lexer *lexer, t_redirect_node **rdr, t_token token,
 
 t_command	*cmd_ccomponents(t_lexer *lexer, t_redirect_node **rdr)
 {
-	t_token		token;
+	t_token			token;
 	t_command		*cmd;
 	t_redirect_node	*tmp;
-	void		*ptr;
+	void			*ptr;
 
 	ptr = (void *)-1;
 	cmd = NULL;
@@ -45,8 +45,8 @@ t_command	*cmd_ccomponents(t_lexer *lexer, t_redirect_node **rdr)
 	{
 		token = get_next_token(lexer);
 		if (token.type == WORD)
-			cmd_addback(&cmd, ft_new_cmd(ft_substr(token.position, 0, token.len),
-					NULL));
+			cmd_addback(&cmd, ft_new_cmd(ft_substr(token.position, 0,
+						token.len), NULL));
 		else if (token.type == VARIABLE)
 			cmd_addback(&cmd, ft_new_cmd(token.position, NULL));
 		else if (token.type == REDIRECT_APPEND || token.type == REDIRECT_INPUT

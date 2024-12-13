@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:10:26 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:57:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:46:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	run_command(t_parser_node *node)
 	else if (!ft_strcmp(cmd, "pwd"))
 		ft_pwd();
 	else if (!ft_strcmp(cmd, "unset"))
-		ft_unset(node);
+		ft_unset(node, 0);
 	else
-		launch_executable(node, env_listsize(se.list));
+		launch_executable(node, env_listsize(g_var.list));
 	free(cmd);
 }
 
@@ -52,8 +52,8 @@ void	ft_pipe(t_parser_node *node)
 		execute_right_command(fd, node->right_child);
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(-1, &se.exit_status, 0);
-	waitpid(-1, &se.exit_status, 0);
+	waitpid(-1, &g_var.exit_status, 0);
+	waitpid(-1, &g_var.exit_status, 0);
 }
 
 void	execute_left_command(int *fd, t_parser_node *left)

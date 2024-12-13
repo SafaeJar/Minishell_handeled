@@ -25,20 +25,20 @@ void	*ft_calloc(size_t num, size_t size)
 /*
 #include <stdio.h>
 
-int main() {
-    char *str;
+int	main(void) {
+	char *str;
 
-    size_t size = 10;
-    str = (char *)calloc(size, sizeof(char));
+	size_t size = 10;
+	str = (char *)calloc(size, sizeof(char));
 
-    if (!str) {
-        printf("Échec.\n");
-        return 1;
-    }
-    printf("Contenu initial %s\n", str);
+	if (!str) {
+		printf("Échec.\n");
+		return (1);
+	}
+	printf("Contenu initial %s\n", str);
 
-    free(str);
+	free(str);
 
-    return 0;
+	return (0);
 }
 */

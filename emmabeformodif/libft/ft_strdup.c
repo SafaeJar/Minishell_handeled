@@ -3,39 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:01:04 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 00:52:42 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:08:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-    size_t x;
-    size_t i;
-    char *ptr;
+	size_t	x;
+	size_t	i;
+	char	*ptr;
 
-    // Check if the input string is NULL
-    if (s1 == NULL)
-        return (NULL);
-
-    i = 0;
-    x = ft_strlen(s1);
-    x++;
-    ptr = (char *)malloc(x * sizeof(char));
-    if (!ptr)
-        return (NULL);
-
-    while (s1[i] != '\0')
-    {
-        ptr[i] = s1[i];
-        i++;
-    }
-    ptr[i] = '\0';
-    return (ptr);
+	if (s1 == NULL)
+		return (NULL);
+	i = 0;
+	x = ft_strlen(s1);
+	x++;
+	ptr = (char *)malloc(x * sizeof(char));
+	if (!ptr)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
 /*

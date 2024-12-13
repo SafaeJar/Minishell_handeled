@@ -26,11 +26,11 @@ void	ft_bzero(void *s, size_t n)
 
 /*
 int	main(void) {
-    char chaine[10] = "Bonjour";
-    printf("Avant bzero: %s\n", chaine);
-    ft_bzero(chaine, 2);
-    printf("Après bzero: %s\n", chaine);
+	char chaine[10] = "Bonjour";
+	printf("Avant bzero: %s\n", chaine);
+	ft_bzero(chaine, 2);
+	printf("Après bzero: %s\n", chaine);
 
-    return (0);
+	return (0);
 }
 */

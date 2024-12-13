@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collect_command.c                                      :+:      :+:    :+:   */
+/*   collect_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 18:17:11 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:28 by sjarfi           ###   ########.fr       */
+/*   Created: 2024/12/13 21:13:46 by marvin            #+#    #+#             */
+/*   Updated: 2024/12/13 21:13:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 t_parser_node	*collect_command(t_lexer *lexer)
 {
-	t_command			*elem;
+	t_command		*elem;
 	t_parser_node	*node;
-	t_redirect_node		*rdrlst;
+	t_redirect_node	*rdrlst;
 	t_token			token;
 	void			*ptr;
 
@@ -39,4 +40,3 @@ t_parser_node	*collect_command(t_lexer *lexer)
 	}
 	return (node);
 }
-

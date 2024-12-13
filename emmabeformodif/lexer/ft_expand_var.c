@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:30 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:53:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*exit_status(char **s)
 	if (!ft_strncmp(*s, "$?", 2))
 	{
 		*s += 2;
-		return (ft_itoa(se.exit_status / 256));
+		return (ft_itoa(g_var.exit_status / 256));
 	}
 	return ((char *)-1);
 }
@@ -64,7 +64,7 @@ char	*exp_var(char **sp)
 	while (ft_isalnum(s[i]) || s[i] == '_')
 		i++;
 	*sp = s + i;
-	value = env_find2(se.list, s, i);
+	value = env_find2(g_var.list, s, i);
 	if (!value)
 		return (ft_strdup(""));
 	return (ft_strdup(value));

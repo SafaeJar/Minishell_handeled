@@ -30,7 +30,7 @@ char	*ft_strrchr(const char *s, int c)
 /*
 int	main(void)
 {
-char			*string = "hello les ";
+char	*string = "hello les ";
 char c= 'l';
 char *res= ft_strrchr(string,c);
 char *res2= strrchr(string,c);

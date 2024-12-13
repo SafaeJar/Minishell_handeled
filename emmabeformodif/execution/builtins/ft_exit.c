@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:05:05 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:05:06 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:40:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static int	handle_digit(char *str, int i)
+{
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+		{
+			g_var.exit_status = 2;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	check_args(char *argv)
 {
@@ -20,25 +34,18 @@ int	check_args(char *argv)
 		|| ((argv[0] == '-' || argv[0] == '+') && !argv[1]) || (argv[0] == '-'
 			&& argv[1] == '-' && argv[2]))
 	{
-		se.exit_status = 2;
+		g_var.exit_status = 2;
 		return (1);
 	}
 	else if (argv[0] == '-' && argv[1] == '-' && !argv[2])
 	{
-		se.exit_status = 0;
+		g_var.exit_status = 0;
 		return (0);
 	}
-	i = (argv[0] == '-' || argv[0] == '+') ? 1 : 0;
-	while (argv[i])
-	{
-		if (!ft_isdigit(argv[i]))
-		{
-			se.exit_status = 2;
-			return (1);
-		}
+	i = 0;
+	if (argv[i] == '-' || argv[i] == '+')
 		i++;
-	}
-	return (0);
+	return (handle_digit(argv, i));
 }
 
 long long	ft_atol(char *str)
@@ -72,21 +79,21 @@ void	ft_exit(t_parser_node *node)
 {
 	printf("exit\n");
 	if (node->ac == 1)
-		se.exit_status = 0;
+		g_var.exit_status = 0;
 	else if (node->ac == 2)
 	{
 		if (check_args(node->av[1]))
 			printf("minishell : exit: %s: numeric argument required\n",
 				node->av[1]);
 		else
-			se.exit_status = ft_atol(node->av[1]);
+			g_var.exit_status = ft_atol(node->av[1]);
 	}
 	else
 	{
 		printf("minishell: exit: too many arguments\n");
-		se.exit_status = 1;
+		g_var.exit_status = 1;
 		return ;
 	}
 	node_del(&node);
-	exit(se.exit_status);
+	exit(g_var.exit_status);
 }

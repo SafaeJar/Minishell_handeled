@@ -24,29 +24,27 @@ int	ft_lstsize(t_list *lst)
 	return (count);
 }
 /*
-#include<stdio.h>
-int main()
+#include <stdio.h>
+
+int	main(void)
 {
-    t_list *node1 = malloc(sizeof(t_list));
-    t_list *node2 = malloc(sizeof(t_list));
-    t_list *node3 = malloc(sizeof(t_list));
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*node3;
 
-    node1->content = "Premier";
-    node1->next = node2;
-
-    node2->content = "Deuxième";
-    node2->next = node3;
-
-    node3->content = "Troisième";
-    node3->next = NULL; 
-
-
+	node1 = malloc(sizeof(t_list));
+	node2 = malloc(sizeof(t_list));
+	node3 = malloc(sizeof(t_list));
+	node1->content = "Premier";
+	node1->next = node2;
+	node2->content = "Deuxième";
+	node2->next = node3;
+	node3->content = "Troisième";
+	node3->next = NULL;
 	printf("le size est :%d\n",ft_lstsize(node1));
-
-    free(node1);
-    free(node2);
-    free(node3);
-
-    return 0;
+	free(node1);
+	free(node2);
+	free(node3);
+	return (0);
 }
 */

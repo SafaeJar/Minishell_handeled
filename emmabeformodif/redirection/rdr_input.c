@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:49 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:44:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/13 21:15:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	execute_rdr_input_command(t_parser_node *node, t_out_in_file *file)
 	waitpid(pid, NULL, 0);
 }
 
-int	get_input_file(t_parser_node *node, t_redirect_node *head, t_out_in_file *file)
+int	get_input_file(t_parser_node *node, t_redirect_node *head,
+		t_out_in_file *file)
 {
 	if (head->type == REDIRECT_INPUT && file->input_file != -1
 		&& file->output_file != -1)
@@ -50,20 +51,24 @@ int	get_input_file(t_parser_node *node, t_redirect_node *head, t_out_in_file *fi
 	return (0);
 }
 
-void *rdr_input(t_parser_node *n, t_redirect_node *l, t_out_in_file *file, int v) {
-    t_redirect_node *head = l;
+void	*rdr_input(t_parser_node *n, t_redirect_node *l, t_out_in_file *file,
+		int v)
+{
+	t_redirect_node	*head;
 
-    while (head) {
+	head = l;
+	while (head)
+	{
 		get_input_file(n, head, file);
-        if (file->output_file == -1 || file->input_file == -1) {
-
-            return NULL; // Stop immediately on error
-        }
-        head = head->next;
-    }
-
-    if (v == 1 && file->input_file != -1 && file->output_file != -1) {
-        execute_rdr_input_command(n, file); // Execute only once
-    }
-    return NULL;
+		if (file->output_file == -1 || file->input_file == -1)
+		{
+			return (NULL);
+		}
+		head = head->next;
+	}
+	if (v == 1 && file->input_file != -1 && file->output_file != -1)
+	{
+		execute_rdr_input_command(n, file);
+	}
+	return (NULL);
 }

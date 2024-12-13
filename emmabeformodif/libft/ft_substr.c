@@ -43,8 +43,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 int	main(void)
 {
-	char string[30] = "bonjours tous le monde";
-	char *s = ft_substr(string, 2, 5);
+	char	string[30] = "bonjours tous le monde";
+	char	*s;
+
+	s = ft_substr(string, 2, 5);
 	printf("%s", s);
 }
 */

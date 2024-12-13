@@ -3,29 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:05:56 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 17:00:59 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 19:41:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// void	ft_pwd(void)
-// {
-// 	char	*cwd;
-
-// 	cwd = getcwd(NULL, 0);
-// 	if (cwd == NULL)
-// 	{
-// 		perror("getcwd");
-// 		se.exit_status = 1;
-// 	}
-// 	printf("%s\n", cwd);
-// 	free(cwd);
-// 	se.exit_status = 0;
-// }
 void	ft_pwd(void)
 {
 	char	*cwd;
@@ -36,5 +22,5 @@ void	ft_pwd(void)
 		printf("%s\n", buffer);
 	else
 		printf("%s\n", cwd);
-	se.exit_status = 0;
+	g_var.exit_status = 0;
 }

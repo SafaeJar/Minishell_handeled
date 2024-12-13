@@ -28,19 +28,19 @@ t_list	*ft_lstnew(void *content)
 
 int	main(void) {
 
-    t_list *newElement = ft_lstnew("Hello, World!");
+	t_list *newElement = ft_lstnew("Hello, World!");
 
 
-    if (newElement != NULL) {
+	if (newElement != NULL) {
 
-        printf("Content: %s\n", (char *)newElement->content);
+		printf("Content: %s\n", (char *)newElement->content);
 
-        free(newElement);
-    } else {
-        printf("Allocation failed.\n");
-    }
+		free(newElement);
+	} else {
+		printf("Allocation failed.\n");
+	}
 
-    return (0);
+	return (0);
 }
 
 */

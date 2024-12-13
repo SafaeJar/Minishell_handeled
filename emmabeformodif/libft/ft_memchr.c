@@ -31,9 +31,10 @@ void	*ft_memchr(const void *buf, int c, size_t count)
 /*
 #include <stdio.h>
 #include <string.h>
+
 int	main(void){
 char *str1="hello sophie ";
-char			*res1 = memchr(str1,'s',3);
+char	*res1 = memchr(str1,'s',3);
 printf("string.h s function : %s\n",res1);
 char *res2= ft_memchr(str1,'s',3);
 

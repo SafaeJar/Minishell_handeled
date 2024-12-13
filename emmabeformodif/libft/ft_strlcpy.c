@@ -32,12 +32,12 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
 /*
 int	main(void){
-    char dst[10];
-    char *src="my name if safae";
-    int  moi = ft_strlcpy(dst,src,0);
-    printf("moi : %d \n",moi);
-    printf("la destination : %s",dst);
-    int x =  ft_strlen(dst);
-    printf("la taille de dest apres la copie : %d",x);
+	char dst[10];
+	char *src="my name if safae";
+	int  moi = ft_strlcpy(dst,src,0);
+	printf("moi : %d \n",moi);
+	printf("la destination : %s",dst);
+	int x =  ft_strlen(dst);
+	printf("la taille de dest apres la copie : %d",x);
 }
 */

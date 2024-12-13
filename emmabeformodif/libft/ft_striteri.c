@@ -29,18 +29,18 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 
 void	toUpperCase(unsigned int __attribute__((unused)) i, char *c)
 {
-    if (*c >= 'a' && *c <= 'z') {
-        *c = *c - ('a' - 'A');
-    }
+	if (*c >= 'a' && *c <= 'z') {
+		*c = *c - ('a' - 'A');
+	}
 }
 int	main(void)
 {
 	char	str[];
 
-    str[] = "Hello";
-    printf("Original string: %s\n", str);
-    ft_striteri(str, toUpperCase);
-    printf("Uppercase string: %s\n", str);
-    return (0);
+	str[] = "Hello";
+	printf("Original string: %s\n", str);
+	ft_striteri(str, toUpperCase);
+	printf("Uppercase string: %s\n", str);
+	return (0);
 }
 */
