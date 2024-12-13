@@ -6,7 +6,7 @@
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:18:07 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 01:16:25 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	afficher_liste_env(void)
 
 char	*get_user_input(char *prompt)
 {
-	prompt = readline("\033[1;95m minishell> \033[0m");
+	prompt = readline("\033[1;95mminishell> \033[0m");
 	if (!prompt)
 	{
 		if (isatty(0))

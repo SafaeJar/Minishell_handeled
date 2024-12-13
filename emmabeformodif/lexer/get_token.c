@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:38 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:52:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/12 23:49:28 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 t_token	get_token(t_lexer *lexer)
 {
-	// Skip leading whitespace
+	
 	while (lexer->current_position && (*lexer->current_position == ' ' || *lexer->current_position == '!'
 			|| *lexer->current_position == ':'))
 		lexer->current_position++;
-	// End of input
 	if (lexer->current_position[0] == '\0')
 		return (t_init(END, 0, NULL));
-	// Operators and special tokens
 	if (!ft_strncmp(lexer->current_position, "|", 1) || !ft_strncmp(lexer->current_position, "&", 1))
 	{
 		if (!ft_strncmp(lexer->current_position, "&", 1))

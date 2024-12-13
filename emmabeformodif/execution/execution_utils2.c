@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:13:19 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/13 00:43:46 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,22 @@ void	*launch_executable(t_parser_node *root, int size)
 	if (check_path(root->av[0]))
 	{
 		if (!execute_file(root->av[0], root->av, env, 1))
-			printf("minishell: %s: command not found\n", root->av[0]);
+		{
+			write(2, "minishell: ", 11);
+            write(2, root->av[0], strlen(root->av[0]));
+            write(2, ": command not found\n", 20);
+		}
+			//printf("minishell: %s: command not found\n", root->av[0]);
 	}
 	else
 	{
 		if (!launch(root, env))
-			printf("minishell: %s: command not found\n", root->av[0]);
+		{
+			write(2, "minishell: ", 11);
+            write(2, root->av[0], strlen(root->av[0]));
+            write(2, ": command not found\n", 20);
+		}
+			//printf("minishell: %s: command not found\n", root->av[0]);
 	}
 	free_env(env, size);
 	return (NULL);

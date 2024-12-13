@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sjarfi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:01:07 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:01:08 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/12 23:45:39 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	validate_identifier(char *name, char *content, int len, int err_opt)
 		if (((name[j] <= 64 && !ft_isdigit(name[j])) || (name[j] >= 91
 					&& name[j] <= 96 && name[j] != '_') || name[j] >= 123)
 			&& name[len - 1] != '+')
-			return (printf("export:: command not found\n"));
+			return(1);
+			//return (printf("export:: command not found\n"));
+
 		j++;
 	}
 	return (0);

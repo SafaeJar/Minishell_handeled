@@ -6,7 +6,7 @@
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:40 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:41 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/12 23:38:41 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,3 @@ t_parser_node	*parse(char *input)
 	free(lexer);
 	return (ast);
 }
-// t_parser_node *parse(char *input) {
-//     t_lexer *lexer = lex_init(quote_def(input));
-//     if (!lexer)
-//         return NULL;
-
-//     t_parser_node *ast = parse_input(lexer);
-//     if (!ast || ast == (void *)-1)
-//         se.exit_status = 258 * 256;
-
-//     free(lexer);
-//     return ast;
-// }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_rdr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:16 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:52:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/12 23:39:15 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,15 @@ if (token.type != WORD && token.type != VARIABLE)
 {
     ft_putstr_fd("minishell: syntax error near unexpected token", 2);
 
-    if (token.position && token.len > 0) // Check if the token is non-empty
+    if (token.position && token.len > 0)
     {
         write(2, "'", 1);
-        ft_putnstr(token.position, token.len, 2); // Print the actual token
+        ft_putnstr(token.position, token.len, 2);
         write(2, "'\n", 2);
     }
     else
     {
-        ft_putstr_fd("`newline'\n", 2); // Handle empty or NULL token case
+        ft_putstr_fd("`newline'\n", 2);
     }
 
     return ((void *)-1);

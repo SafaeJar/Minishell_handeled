@@ -3,7 +3,7 @@ NAME = minishell
 
 # Compilateur et options de compilation
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -g3 -fsanitize=address
 
 # Bibliothèque nécessaire pour readline
 LIBS = -lreadline
