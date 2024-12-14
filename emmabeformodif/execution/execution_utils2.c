@@ -6,7 +6,7 @@
 /*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 23:07:49 by sjarfi           ###   ########.fr       */
+/*   Updated: 2024/12/14 23:59:01 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,13 @@ char	*search_(char **split_content, char **argv, char **args, int index)
 	tmp_path = ft_strjoin("/", argv[0]);
 	if (!tmp_path)
 	{
-		printf("11minishell: memory allocation failed\n");
 		clear_path_content(split_content);
 		return (NULL);
 	}
 	tmp2_path = ft_strjoin(split_content[index], tmp_path);
 	if (!tmp2_path)
 	{
-		printf("22minishell: memory allocation failed\n");
+		printf("minishell: memory allocation failed\n");
 		clear_path_content(split_content);
 		free(tmp_path);
 		return (NULL);

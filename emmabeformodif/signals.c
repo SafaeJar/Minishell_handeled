@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:10 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 02:28:28 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 23:44:13 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	sig_handler(int sig)
 {
 	if (sig == SIGQUIT)
 	{
-		g_var.check_sigquit = 1;
 		return ;
 	}
 	if (sig == SIGINT)
@@ -35,6 +34,6 @@ void	ft_signal(void)
 	g_var.check_sigquit = 0;
 	g_var.check_sigint = 0;
 	if (signal(SIGINT, &sig_handler) == SIG_ERR || signal(SIGQUIT,
-			&sig_handler) == SIG_ERR)
+			SIG_IGN) == SIG_ERR)
 		perror("minishell");
 }

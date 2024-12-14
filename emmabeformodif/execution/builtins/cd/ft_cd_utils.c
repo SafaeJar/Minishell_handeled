@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:05:44 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 23:58:18 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	add_new_env_var(t_envi_node **env_list, char *name, char *content)
 	new_node = (t_envi_node *)malloc(sizeof(t_envi_node));
 	new_node->name = ft_strdup(name);
 	new_node->content = ft_strdup(content);
-	if (!new_node || !(new_node->name)
-		|| !(new_node->content))
+	if (!new_node || !(new_node->name) || !(new_node->content))
 	{
 		printf("minishell: memory allocation failed\n");
 		g_var.exit_status = 1;
@@ -34,25 +33,16 @@ void	add_new_env_var(t_envi_node **env_list, char *name, char *content)
 
 void	update_env_var(t_envi_node **env_list, char *name, char *content)
 {
-	t_envi_node	*env_node;
+	t_envi_node	*node;
 
-	env_node = var_find(*env_list, name);
-	if (env_node)
+	node = var_find(*env_list, name);
+	if (node)
 	{
-		free(env_node->content);
-		env_node->content = ft_strdup(content);
-		if (!env_node->content)
-		{
-			printf("minishell: memory allocation failed\n");
-			g_var.exit_status = 1;
-			return ;
-		}
-		env_node->len = ft_strlen(content);
+		free(node->content);
+		node->content = ft_strdup(content);
 	}
 	else
-	{
 		add_new_env_var(env_list, name, content);
-	}
 }
 
 void	go_to_home(char *current_dir)
