@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 01:53:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 21:53:35 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ t_parser_node				*node_create(t_command **av,
 char						**av_creat(t_command **list);
 t_redirect_node				*collect_rdr(t_lexer *lexer, t_redirect_node *rdr,
 								t_token token);
+void						heredoc_handler_helper(char *f);
+void						collect_rdr_helper(t_token token);
 void						rdr_addback(t_redirect_node **lst,
 								t_redirect_node *_new);
 void						node_del(t_parser_node **node);

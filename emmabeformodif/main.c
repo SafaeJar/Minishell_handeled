@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 02:07:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 22:02:16 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ char	*get_user_input(char *prompt)
 	return (prompt);
 }
 
+void	main_helper(char *line, t_parser_node *tree)
+{
+	line = get_user_input(line);
+	if (line && *line)
+	{
+		tree = parse(line);
+		if (tree)
+		{
+			execution(tree);
+			node_del(&tree);
+		}
+	}
+	free(line);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_parser_node	*tree;
@@ -68,17 +83,7 @@ int	main(int argc, char **argv, char **env)
 				g_var.check_sigint = 0;
 				continue ;
 			}
-			line = get_user_input(line);
-			if (line && *line)
-			{
-				tree = parse(line);
-				if (tree)
-				{
-					execution(tree);
-					node_del(&tree);
-				}
-			}
-			free(line);
+			main_helper(line, tree);
 		}
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:13:46 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/13 21:13:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 21:53:19 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,27 @@ t_parser_node	*collect_command(t_lexer *lexer)
 		return (ptr);
 	}
 	return (node);
+}
+
+void	heredoc_handler_helper(char *f)
+{
+	ft_putstr_fd("minishel: ", 2);
+	ft_putstr_fd(f, 2);
+	ft_putstr_fd(": ", 2);
+	printf("minishell: %s:\n", strerror(errno));
+}
+
+void	collect_rdr_helper(t_token token)
+{
+	ft_putstr_fd("minishell: syntax error near unexpected token", 2);
+	if (token.position && token.len > 0)
+	{
+		write(2, "'", 1);
+		ft_putnstr(token.position, token.len, 2);
+		write(2, "'\n", 2);
+	}
+	else
+	{
+		ft_putstr_fd("`newline'\n", 2);
+	}
 }

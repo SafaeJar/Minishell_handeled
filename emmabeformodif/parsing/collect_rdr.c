@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collect_rdr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:16 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 02:22:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 21:53:10 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ static int	heredoc_handler(char *f, char *delim, bool expand)
 	fd = open(f, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		ft_putstr_fd("minishel: ", 2);
-		ft_putstr_fd(f, 2);
-		ft_putstr_fd(": ", 2);
-		printf("minishell: %s:\n", strerror(errno));
+		heredoc_handler_helper(f);
 		return (-1);
 	}
 	line = readline(">");
@@ -112,17 +109,7 @@ t_redirect_node	*collect_rdr(t_lexer *lexer, t_redirect_node *rdr,
 	token = get_next_token(lexer);
 	if (token.type != WORD && token.type != VARIABLE)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token", 2);
-		if (token.position && token.len > 0)
-		{
-			write(2, "'", 1);
-			ft_putnstr(token.position, token.len, 2);
-			write(2, "'\n", 2);
-		}
-		else
-		{
-			ft_putstr_fd("`newline'\n", 2);
-		}
+		collect_rdr_helper(token);
 		return ((void *)-1);
 	}
 	rdr = malloc(sizeof(t_redirect_node));

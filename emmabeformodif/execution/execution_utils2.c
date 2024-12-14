@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:13:18 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 01:35:20 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 23:07:49 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ char	*search_(char **split_content, char **argv, char **args, int index)
 	tmp_path = ft_strjoin("/", argv[0]);
 	if (!tmp_path)
 	{
-		printf("minishell: memory allocation failed\n");
+		printf("11minishell: memory allocation failed\n");
 		clear_path_content(split_content);
 		return (NULL);
 	}
 	tmp2_path = ft_strjoin(split_content[index], tmp_path);
 	if (!tmp2_path)
 	{
-		printf("minishell: memory allocation failed\n");
+		printf("22minishell: memory allocation failed\n");
 		clear_path_content(split_content);
 		free(tmp_path);
 		return (NULL);
@@ -72,18 +72,17 @@ void	*searsh_in_path(char *path, char **argv, char **env, char **args)
 	split_content = ft_split(path, ':');
 	if (!split_content)
 	{
-		printf("minishell: memory allocation failed\n");
+		printf("33minishell: memory allocation failed\n");
 		return (NULL);
 	}
 	i = 0;
-	while (split_content[i])
+	while (split_content[i] != NULL)
 	{
 		tmp_path = search_(split_content, argv, args, i);
+		if (!tmp_path)
+			return (NULL);
 		if (execute_file(tmp_path, args, env, 2))
-		{
-			clear_path_content(split_content);
-			return ((void *)1);
-		}
+			return (clear_path_content(split_content), (void *)1);
 		free(tmp_path);
 		i++;
 	}
