@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:40 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:54:05 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/15 00:05:39 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ t_token	t_wc_init(t_token_type type, int len, t_file_node *p, char *pos)
 	tok.position = pos;
 	tok.len = len;
 	return (tok);
+}
+
+char	*ft_exp(char *expnd, char **s)
+{
+	expnd = exit_status(s);
+	if (expnd == (char *)-1)
+		expnd = exp_var(s);
+	return (expnd);
 }

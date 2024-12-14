@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_search.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:16:42 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 21:07:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/15 00:03:09 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,3 @@ t_token	word_collect(t_lexer *lexer, int var, int len)
 		return (expand_all(lexer, var, len));
 	return (t_init(WORD, len, lexer->current_position));
 }
-
-// t_token	word_collect(t_lexer *lexer, int var, int len)
-// {
-// 	int		mode;
-// 	char	*s;
-// 	t_token	token;
-
-// 	s = lexer->current_position;
-// 	mode = 0;
-// 	while (s[len] != '\0' && (mode != 0 || (ft_strchr(" \t\n|&()<>", s[len]))))
-// 	{
-// 		mode = change_mode2(mode, s[len]);
-// 		if (s[len] == '$' && mode != 1)
-// 			var = 1;
-// 		if (s[len] == '*' && var == 0 && mode == 0)
-// 			var = 2;
-// 		len++;
-// 	}
-// 	if (!len)
-// 		return (t_init(TOK, 0, lexer->current_position));
-// 	if (mode != 0 && s[len] == '\0')
-// 		return (t_init(ENDF, 0, NULL));
-// 	token = expand_all(lexer, var, len);
-// 	return (token);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_creat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 18:17:36 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/11 17:57:41 by marvin           ###   ########.fr       */
+/*   Created: 2024/12/15 00:16:10 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/15 00:20:59 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ void	node_ptr(t_parser_node **node, t_parser_node *left,
 {
 	(*node)->right_child = right;
 	(*node)->left_child = left;
+}
+
+void	node_clear(t_parser_node *node)
+{
+	int	i;
+
+	i = 0;
+	if (node)
+	{
+		while (node->av && node->av[i])
+			free(node->av[i++]);
+		free(node->av);
+		rdr_clear(&node->redirect_list);
+		free(node);
+	}
+}
+
+void	node_del(t_parser_node **node)
+{
+	t_parser_node	*tmp;
+
+	tmp = *node;
+	if (tmp)
+	{
+		node_del(&tmp->left_child);
+		node_del(&tmp->right_child);
+		node_clear(tmp);
+	}
 }

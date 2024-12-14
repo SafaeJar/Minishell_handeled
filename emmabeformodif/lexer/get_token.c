@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 18:16:38 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 01:40:24 by marvin           ###   ########.fr       */
+/*   Created: 2024/12/15 00:02:45 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/15 00:16:39 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,20 @@ t_token	get_token(t_lexer *lexer)
 	if (token.type != TOKEN_NULL)
 		return (token);
 	return (word_collect(lexer, 0, 0));
+}
+
+t_token	get_next_token(t_lexer *lexer)
+{
+	t_token	token;
+	int		i;
+
+	i = 0;
+	lexer->prev_token = lexer->current_token;
+	token = get_token(lexer);
+	lexer->current_position += token.len;
+	lexer->current_token = token;
+	while (lexer->current_position[i] && lexer->current_position[i] == 32)
+		i++;
+	lexer->current_position += i;
+	return (token);
 }

@@ -34,13 +34,10 @@ SRCS = 	envirenement/creation_envi.c \
 		libft/ft_striteri.c\
 		libft/ft_strdup.c libft/ft_strrchr.c\
 		lexer/change_mode.c\
-		lexer/ft_exp.c\
 		lexer/ft_expand_var.c\
-		lexer/get_next_token.c\
 		lexer/get_token.c\
 		lexer/initialisation.c\
 		lexer/lex_search.c\
-		lexer/quote_def.c\
 		utils/utils.c\
 		utils/cmd_list.c\
 		utils/remove_q.c\
@@ -54,8 +51,6 @@ SRCS = 	envirenement/creation_envi.c \
 		parsing/collect_rdr.c\
 		parsing/ft_pipe_line.c\
 		parsing/node_creat.c\
-		parsing/node_del.c\
-		parsing/parse_input.c\
 		parsing/parser_start.c\
 		parsing/rdr_addback.c\
 		parsing/print_error.c\

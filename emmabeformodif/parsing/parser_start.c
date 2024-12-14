@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_start.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sjarfi <sjarfi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 18:17:40 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 19:05:06 by marvin           ###   ########.fr       */
+/*   Created: 2024/12/15 00:13:43 by sjarfi            #+#    #+#             */
+/*   Updated: 2024/12/15 00:20:50 by sjarfi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,41 @@ t_parser_node	*parse(char *input)
 	}
 	free(lexer);
 	return (ast);
+}
+
+char	*quote_def(char *str)
+{
+	char	*s;
+	int		mode;
+
+	s = str;
+	mode = 0;
+	while (*s)
+	{
+		mode = change_mode(mode, *s);
+		if (*s == 34 && (mode == 2 || mode == 0))
+			*s = DEF_DOUBEL_Q;
+		else if (*s == 39 && (mode == 1 || mode == 0))
+			*s = DEF_SINGEL_Q;
+		s++;
+	}
+	return (str);
+}
+
+t_parser_node	*parse_input(t_lexer *lexer)
+{
+	t_parser_node	*pipeline;
+	t_token			token;
+
+	pipeline = ft_pipe_line(lexer);
+	if (!pipeline || pipeline == (void *)-1)
+		return (pipeline);
+	token = get_next_token(lexer);
+	if (token.type != END)
+	{
+		print_error(token);
+		node_del(&pipeline);
+		return (NULL);
+	}
+	return (pipeline);
 }
