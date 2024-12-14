@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:06 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/13 19:07:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 02:07:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,28 @@ int	main(int argc, char **argv, char **env)
 	line = NULL;
 	if (argc < 2 && !argv[1])
 	{
+		ft_signal();
 		g_var.list = creer_envi(env);
-		ft_list_remove_if(&g_var.list, "OLDPWD");
 		while (1)
 		{
-			handle_signal(SIG_DEFAULT);
-			line = get_user_input(line);
-			tree = parse(line);
-			if (tree)
+			if (g_var.check_sigint)
 			{
-				if (g_var.check_sigint == 0)
+				g_var.check_sigint = 0;
+				continue ;
+			}
+			line = get_user_input(line);
+			if (line && *line)
+			{
+				tree = parse(line);
+				if (tree)
+				{
 					execution(tree);
-				node_del(&tree);
+					node_del(&tree);
+				}
 			}
 			free(line);
 		}
 		return (0);
 	}
+	return (1);
 }

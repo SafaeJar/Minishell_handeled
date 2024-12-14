@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:17:16 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 00:37:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 02:22:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	heredoc_handler(char *f, char *delim, bool expand)
 	line = readline(">");
 	while (line)
 	{
+		signal(SIGINT, SIG_IGN);
 		if (g_var.check_sigint == 1 || !ft_strcmp(line, delim))
 			break ;
 		if (get_heredoc_l(f, fd, line, expand))

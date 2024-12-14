@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:18:08 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/14 00:35:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 01:53:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,8 @@ t_envi_node					*creer_envi(char **env);
 void						_set_pwd(t_envi_node **lst);
 void						_shell_level(t_envi_node **lst);
 t_envi_node					*add_env_node(t_envi_node *var, char *s, int i);
-void						handler(int signum);
-void						child_sigint(int sig);
-void						heredoc_sigint(int sig);
-void						df_sigint(int sig);
+void						sig_handler(int sig);
+void						ft_signal(void);
 void						execution(t_parser_node *node);
 void						ft_pipe(t_parser_node *node);
 void						execute_right_command(int *fd,

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 20:58:22 by sjarfi            #+#    #+#             */
-/*   Updated: 2024/12/04 00:17:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/14 01:32:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	res[i] = '\0';
 	return (res);
 }
-
-/*
-char	transform(unsigned int index, char c) {
-	if(c>= 'a' && c<= 'z')
-	return (char)(c - 32);
-	else
-	return (char)(c);
-}
-
-int	main(void) {
-	const char *original = "hello, world!";
-
-	char *result = ft_strmapi(original, &transform);
-
-	if (!result) {
-		fprintf(stderr, "Erreur d'allocation de mémoire\n");
-
-	}
-
-	printf("Chaine d'origine : %s\n", original);
-	printf("Resultat transforme : %s\n", result);
-
-
-}
-*/
